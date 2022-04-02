@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Ardalis.Specification;
 using w9wen.dotnet.Template.Core.ProjectAggregate;
 using w9wen.dotnet.Template.Core.Services;
-using w9wen.dotnet.Template.SharedKernel.Interfaces;
+using w9wen.SharedKernel.Interfaces;
 using Moq;
 using Xunit;
 

@@ -17,10 +17,10 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.3" />
     <PackageReference Include="SQLite" Version="3.13.0" />
     <PackageReference Include="NETStandard.Library" Version="2.0.3" />
+    <PackageReference Include="w9wen.SharedKernel" Version="1.0.0" />
   </ItemGroup>
   
   <ItemGroup>
     <ProjectReference Include="..\w9wen.dotnet.Template.Core\w9wen.dotnet.Template.Core.csproj" />
-    <ProjectReference Include="..\w9wen.dotnet.Template.SharedKernel\w9wen.dotnet.Template.SharedKernel.csproj" />
   </ItemGroup>
 </Project>

@@ -1,5 +1,5 @@
 ﻿using Ardalis.Specification.EntityFrameworkCore;
-using w9wen.dotnet.Template.SharedKernel.Interfaces;
+using w9wen.SharedKernel.Interfaces;
 
 namespace w9wen.dotnet.Template.Infrastructure.Data;
 

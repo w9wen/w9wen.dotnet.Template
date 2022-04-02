@@ -1,6 +1,6 @@
 ﻿using Ardalis.EFCore.Extensions;
 using w9wen.dotnet.Template.Core.ProjectAggregate;
-using w9wen.dotnet.Template.SharedKernel;
+using w9wen.SharedKernel;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 

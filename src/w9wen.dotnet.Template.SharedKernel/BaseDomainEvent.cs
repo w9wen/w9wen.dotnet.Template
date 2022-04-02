@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace w9wen.dotnet.Template.SharedKernel;
+namespace w9wen.SharedKernel;
 
 public abstract class BaseDomainEvent : INotification
 {

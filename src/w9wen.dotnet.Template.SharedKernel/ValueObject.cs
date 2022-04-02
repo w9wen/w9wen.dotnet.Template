@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace w9wen.dotnet.Template.SharedKernel;
+namespace w9wen.SharedKernel;
 
 // source: https://github.com/jhewlett/ValueObject
 public abstract class ValueObject : IEquatable<ValueObject>

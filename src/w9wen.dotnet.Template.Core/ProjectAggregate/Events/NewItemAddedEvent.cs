@@ -1,4 +1,4 @@
-﻿using w9wen.dotnet.Template.SharedKernel;
+﻿using w9wen.SharedKernel;
 
 namespace w9wen.dotnet.Template.Core.ProjectAggregate.Events;
 

@@ -14,10 +14,7 @@
     <PackageReference Include="Ardalis.Specification" Version="6.0.1" />
     <PackageReference Include="Autofac" Version="6.3.0" />
     <PackageReference Include="MediatR" Version="10.0.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\w9wen.dotnet.Template.SharedKernel\w9wen.dotnet.Template.SharedKernel.csproj" />
+    <PackageReference Include="w9wen.SharedKernel" Version="1.0.0" />
   </ItemGroup>
 
 </Project>

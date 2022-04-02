@@ -3,7 +3,7 @@ using Autofac;
 using w9wen.dotnet.Template.Core.Interfaces;
 using w9wen.dotnet.Template.Core.ProjectAggregate;
 using w9wen.dotnet.Template.Infrastructure.Data;
-using w9wen.dotnet.Template.SharedKernel.Interfaces;
+using w9wen.SharedKernel.Interfaces;
 using MediatR;
 using MediatR.Pipeline;
 using Module = Autofac.Module;

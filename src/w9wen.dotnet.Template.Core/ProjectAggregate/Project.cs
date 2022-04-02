@@ -1,7 +1,7 @@
 ﻿using Ardalis.GuardClauses;
 using w9wen.dotnet.Template.Core.ProjectAggregate.Events;
-using w9wen.dotnet.Template.SharedKernel;
-using w9wen.dotnet.Template.SharedKernel.Interfaces;
+using w9wen.SharedKernel;
+using w9wen.SharedKernel.Interfaces;
 
 namespace w9wen.dotnet.Template.Core.ProjectAggregate;
 

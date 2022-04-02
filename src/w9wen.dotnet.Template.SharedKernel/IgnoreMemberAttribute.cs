@@ -1,4 +1,4 @@
-﻿namespace w9wen.dotnet.Template.SharedKernel;
+﻿namespace w9wen.SharedKernel;
 
 // source: https://github.com/jhewlett/ValueObject
 [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field)]

@@ -1,6 +1,6 @@
 ﻿using w9wen.dotnet.Template.Core.ProjectAggregate;
 using w9wen.dotnet.Template.Core.ProjectAggregate.Specifications;
-using w9wen.dotnet.Template.SharedKernel.Interfaces;
+using w9wen.SharedKernel.Interfaces;
 using w9wen.dotnet.Template.Web.ApiModels;
 using Microsoft.AspNetCore.Mvc;
 

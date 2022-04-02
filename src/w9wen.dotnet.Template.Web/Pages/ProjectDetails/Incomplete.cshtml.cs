@@ -3,7 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using w9wen.dotnet.Template.Core.ProjectAggregate;
 using w9wen.dotnet.Template.Core.ProjectAggregate.Specifications;
-using w9wen.dotnet.Template.SharedKernel.Interfaces;
+using w9wen.SharedKernel.Interfaces;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace w9wen.dotnet.Template.Web.Pages.ToDoRazorPage;
