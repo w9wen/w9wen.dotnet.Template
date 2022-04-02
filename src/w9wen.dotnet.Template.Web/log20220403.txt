@@ -1,0 +1,126 @@
+2022-04-03 07:11:18.472 +08:00 [INF] User profile is available. Using 'C:\Users\William.Wen\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2022-04-03 07:11:19.262 +08:00 [INF] Entity Framework Core 6.0.3 initialized 'AppDbContext' using provider 'Microsoft.EntityFrameworkCore.Sqlite:6.0.3' with options: None
+2022-04-03 07:11:19.510 +08:00 [INF] Executed DbCommand (9ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+PRAGMA journal_mode = 'wal';
+2022-04-03 07:11:19.592 +08:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "Projects" (
+    "Id" INTEGER NOT NULL CONSTRAINT "PK_Projects" PRIMARY KEY AUTOINCREMENT,
+    "Name" TEXT NOT NULL,
+    "Priority" INTEGER NOT NULL
+);
+2022-04-03 07:11:19.593 +08:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "ToDoItems" (
+    "Id" INTEGER NOT NULL CONSTRAINT "PK_ToDoItems" PRIMARY KEY AUTOINCREMENT,
+    "Title" TEXT NOT NULL,
+    "Description" TEXT NOT NULL,
+    "IsDone" INTEGER NOT NULL,
+    "ProjectId" INTEGER NULL,
+    CONSTRAINT "FK_ToDoItems_Projects_ProjectId" FOREIGN KEY ("ProjectId") REFERENCES "Projects" ("Id")
+);
+2022-04-03 07:11:19.593 +08:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_ToDoItems_ProjectId" ON "ToDoItems" ("ProjectId");
+2022-04-03 07:11:19.623 +08:00 [INF] Entity Framework Core 6.0.3 initialized 'AppDbContext' using provider 'Microsoft.EntityFrameworkCore.Sqlite:6.0.3' with options: None
+2022-04-03 07:11:19.750 +08:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "ToDoItems" AS "t")
+2022-04-03 07:11:19.777 +08:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "p"."Id", "p"."Name", "p"."Priority"
+FROM "Projects" AS "p"
+2022-04-03 07:11:19.780 +08:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "t"."Id", "t"."Description", "t"."IsDone", "t"."ProjectId", "t"."Title"
+FROM "ToDoItems" AS "t"
+2022-04-03 07:11:19.948 +08:00 [INF] Executed DbCommand (4ms) [Parameters=[@p0='?' (Size = 12), @p1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "Projects" ("Name", "Priority")
+VALUES (@p0, @p1);
+SELECT "Id"
+FROM "Projects"
+WHERE changes() = 1 AND "rowid" = last_insert_rowid();
+2022-04-03 07:11:19.968 +08:00 [INF] Executed DbCommand (0ms) [Parameters=[@p2='?' (Size = 31), @p3='?' (DbType = Boolean), @p4='?' (DbType = Int32), @p5='?' (Size = 18)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "ToDoItems" ("Description", "IsDone", "ProjectId", "Title")
+VALUES (@p2, @p3, @p4, @p5);
+SELECT "Id"
+FROM "ToDoItems"
+WHERE changes() = 1 AND "rowid" = last_insert_rowid();
+2022-04-03 07:11:19.969 +08:00 [INF] Executed DbCommand (0ms) [Parameters=[@p0='?' (Size = 81), @p1='?' (DbType = Boolean), @p2='?' (DbType = Int32), @p3='?' (Size = 15)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "ToDoItems" ("Description", "IsDone", "ProjectId", "Title")
+VALUES (@p0, @p1, @p2, @p3);
+SELECT "Id"
+FROM "ToDoItems"
+WHERE changes() = 1 AND "rowid" = last_insert_rowid();
+2022-04-03 07:11:19.969 +08:00 [INF] Executed DbCommand (0ms) [Parameters=[@p0='?' (Size = 59), @p1='?' (DbType = Boolean), @p2='?' (DbType = Int32), @p3='?' (Size = 20)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "ToDoItems" ("Description", "IsDone", "ProjectId", "Title")
+VALUES (@p0, @p1, @p2, @p3);
+SELECT "Id"
+FROM "ToDoItems"
+WHERE changes() = 1 AND "rowid" = last_insert_rowid();
+2022-04-03 07:11:20.120 +08:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-04-03 07:11:20.121 +08:00 [INF] Hosting environment: Development
+2022-04-03 07:11:20.121 +08:00 [INF] Content root path: D:\GITHUB\w9wen.dotnet.Template\src\w9wen.dotnet.Template.Web\
+2022-04-03 07:11:20.163 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:57678/ - -
+2022-04-03 07:11:20.211 +08:00 [WRN] Failed to determine the https port for redirect.
+2022-04-03 07:11:20.417 +08:00 [INF] Executing endpoint 'w9wen.dotnet.Template.Web.Controllers.HomeController.Index (w9wen.dotnet.Template.Web)'
+2022-04-03 07:11:20.423 +08:00 [INF] Route matched with {action = "Index", controller = "Home", page = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller w9wen.dotnet.Template.Web.Controllers.HomeController (w9wen.dotnet.Template.Web).
+2022-04-03 07:11:20.429 +08:00 [INF] Executing ViewResult, running view Index.
+2022-04-03 07:11:20.617 +08:00 [INF] Executed ViewResult - view Index executed in 187.7819ms.
+2022-04-03 07:11:20.620 +08:00 [INF] Executed action w9wen.dotnet.Template.Web.Controllers.HomeController.Index (w9wen.dotnet.Template.Web) in 196.9458ms
+2022-04-03 07:11:20.621 +08:00 [INF] Executed endpoint 'w9wen.dotnet.Template.Web.Controllers.HomeController.Index (w9wen.dotnet.Template.Web)'
+2022-04-03 07:11:20.746 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/ - - - 200 - text/html;+charset=utf-8 578.0341ms
+2022-04-03 07:11:20.749 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:57678/css/site.css - -
+2022-04-03 07:11:20.752 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:57678/lib/jquery/dist/jquery.js - -
+2022-04-03 07:11:20.753 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:57678/lib/bootstrap/dist/css/bootstrap.css - -
+2022-04-03 07:11:20.759 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:57678/js/site.js?v=4q1jwFhaPaZgr8WAUSrux6hAuh0XDg9kPS3xIVq36I0 - -
+2022-04-03 07:11:20.767 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:57678/lib/bootstrap/dist/js/bootstrap.js - -
+2022-04-03 07:11:20.767 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:57678/_framework/aspnetcore-browser-refresh.js - -
+2022-04-03 07:11:20.788 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/_framework/aspnetcore-browser-refresh.js - - - 200 12008 application/javascript;+charset=utf-8 20.4644ms
+2022-04-03 07:11:20.835 +08:00 [INF] Sending file. Request path: '/css/site.css'. Physical path: 'D:\GITHUB\w9wen.dotnet.Template\src\w9wen.dotnet.Template.Web\wwwroot\css\site.css'
+2022-04-03 07:11:20.835 +08:00 [INF] Sending file. Request path: '/lib/bootstrap/dist/css/bootstrap.css'. Physical path: 'D:\GITHUB\w9wen.dotnet.Template\src\w9wen.dotnet.Template.Web\wwwroot\lib\bootstrap\dist\css\bootstrap.css'
+2022-04-03 07:11:20.835 +08:00 [INF] Sending file. Request path: '/js/site.js'. Physical path: 'D:\GITHUB\w9wen.dotnet.Template\src\w9wen.dotnet.Template.Web\wwwroot\js\site.js'
+2022-04-03 07:11:20.835 +08:00 [INF] Sending file. Request path: '/lib/jquery/dist/jquery.js'. Physical path: 'D:\GITHUB\w9wen.dotnet.Template\src\w9wen.dotnet.Template.Web\wwwroot\lib\jquery\dist\jquery.js'
+2022-04-03 07:11:20.835 +08:00 [INF] Sending file. Request path: '/lib/bootstrap/dist/js/bootstrap.js'. Physical path: 'D:\GITHUB\w9wen.dotnet.Template\src\w9wen.dotnet.Template.Web\wwwroot\lib\bootstrap\dist\js\bootstrap.js'
+2022-04-03 07:11:20.835 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/css/site.css - - - 200 1417 text/css 86.8108ms
+2022-04-03 07:11:20.835 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/js/site.js?v=4q1jwFhaPaZgr8WAUSrux6hAuh0XDg9kPS3xIVq36I0 - - - 200 230 application/javascript 81.9250ms
+2022-04-03 07:11:20.839 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/lib/bootstrap/dist/css/bootstrap.css - - - 200 152767 text/css 86.9056ms
+2022-04-03 07:11:20.839 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/lib/bootstrap/dist/js/bootstrap.js - - - 200 72084 application/javascript 72.5514ms
+2022-04-03 07:11:20.842 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/lib/jquery/dist/jquery.js - - - 200 278292 application/javascript 93.1684ms
+2022-04-03 07:11:20.898 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:57678/favicon.ico - -
+2022-04-03 07:11:20.902 +08:00 [INF] Sending file. Request path: '/favicon.ico'. Physical path: 'D:\GITHUB\w9wen.dotnet.Template\src\w9wen.dotnet.Template.Web\wwwroot\favicon.ico'
+2022-04-03 07:11:20.903 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/favicon.ico - - - 200 5430 image/x-icon 4.2259ms
+2022-04-03 07:16:44.381 +08:00 [INF] User profile is available. Using 'C:\Users\William.Wen\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2022-04-03 07:16:45.029 +08:00 [INF] Entity Framework Core 6.0.3 initialized 'AppDbContext' using provider 'Microsoft.EntityFrameworkCore.Sqlite:6.0.3' with options: None
+2022-04-03 07:16:45.112 +08:00 [INF] Executed DbCommand (8ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*) FROM "sqlite_master" WHERE "type" = 'table' AND "rootpage" IS NOT NULL;
+2022-04-03 07:16:45.136 +08:00 [INF] Entity Framework Core 6.0.3 initialized 'AppDbContext' using provider 'Microsoft.EntityFrameworkCore.Sqlite:6.0.3' with options: None
+2022-04-03 07:16:45.271 +08:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "ToDoItems" AS "t")
+2022-04-03 07:16:45.350 +08:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-04-03 07:16:45.350 +08:00 [INF] Hosting environment: Development
+2022-04-03 07:16:45.350 +08:00 [INF] Content root path: D:\GITHUB\w9wen.dotnet.Template\src\w9wen.dotnet.Template.Web\
+2022-04-03 07:16:45.369 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:57678/ - -
+2022-04-03 07:16:45.407 +08:00 [WRN] Failed to determine the https port for redirect.
+2022-04-03 07:16:45.548 +08:00 [INF] Executing endpoint 'w9wen.dotnet.Template.Web.Controllers.HomeController.Index (w9wen.dotnet.Template.Web)'
+2022-04-03 07:16:45.555 +08:00 [INF] Route matched with {action = "Index", controller = "Home", page = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller w9wen.dotnet.Template.Web.Controllers.HomeController (w9wen.dotnet.Template.Web).
+2022-04-03 07:16:45.563 +08:00 [INF] Executing ViewResult, running view Index.
+2022-04-03 07:16:45.698 +08:00 [INF] Executed ViewResult - view Index executed in 135.9243ms.
+2022-04-03 07:16:45.701 +08:00 [INF] Executed action w9wen.dotnet.Template.Web.Controllers.HomeController.Index (w9wen.dotnet.Template.Web) in 145.5529ms
+2022-04-03 07:16:45.701 +08:00 [INF] Executed endpoint 'w9wen.dotnet.Template.Web.Controllers.HomeController.Index (w9wen.dotnet.Template.Web)'
+2022-04-03 07:16:45.727 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/ - - - 200 - text/html;+charset=utf-8 359.8041ms
+2022-04-03 07:16:45.740 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:57678/css/site.css - -
+2022-04-03 07:16:45.741 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:57678/lib/bootstrap/dist/css/bootstrap.css - -
+2022-04-03 07:16:45.741 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:57678/_framework/aspnetcore-browser-refresh.js - -
+2022-04-03 07:16:45.743 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:57678/js/site.js?v=4q1jwFhaPaZgr8WAUSrux6hAuh0XDg9kPS3xIVq36I0 - -
+2022-04-03 07:16:45.746 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:57678/lib/bootstrap/dist/js/bootstrap.js - -
+2022-04-03 07:16:45.748 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:57678/lib/jquery/dist/jquery.js - -
+2022-04-03 07:16:45.763 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/_framework/aspnetcore-browser-refresh.js - - - 200 12008 application/javascript;+charset=utf-8 21.5063ms
+2022-04-03 07:16:45.767 +08:00 [INF] The file /lib/jquery/dist/jquery.js was not modified
+2022-04-03 07:16:45.767 +08:00 [INF] The file /css/site.css was not modified
+2022-04-03 07:16:45.767 +08:00 [INF] The file /lib/bootstrap/dist/css/bootstrap.css was not modified
+2022-04-03 07:16:45.767 +08:00 [INF] The file /lib/bootstrap/dist/js/bootstrap.js was not modified
+2022-04-03 07:16:45.767 +08:00 [INF] The file /js/site.js was not modified
+2022-04-03 07:16:45.768 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/lib/bootstrap/dist/css/bootstrap.css - - - 304 - text/css 28.9806ms
+2022-04-03 07:16:45.768 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/lib/bootstrap/dist/js/bootstrap.js - - - 304 - application/javascript 22.3745ms
+2022-04-03 07:16:45.768 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/lib/jquery/dist/jquery.js - - - 304 - application/javascript 20.1716ms
+2022-04-03 07:16:45.768 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/css/site.css - - - 304 - text/css 28.9807ms
+2022-04-03 07:16:45.768 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/js/site.js?v=4q1jwFhaPaZgr8WAUSrux6hAuh0XDg9kPS3xIVq36I0 - - - 304 - application/javascript 24.8113ms
