@@ -162,3 +162,61 @@ SELECT EXISTS (
 2022-04-03 07:31:05.685 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/lib/bootstrap/dist/js/bootstrap.js - - - 304 - application/javascript 96.9967ms
 2022-04-03 07:31:05.685 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/lib/jquery/dist/jquery.js - - - 304 - application/javascript 19.7386ms
 2022-04-03 07:31:05.685 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/css/site.css - - - 304 - text/css 19.1458ms
+2022-04-03 08:37:34.635 +08:00 [INF] User profile is available. Using 'C:\Users\William.Wen\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2022-04-03 08:37:35.260 +08:00 [INF] Entity Framework Core 6.0.3 initialized 'AppDbContext' using provider 'Microsoft.EntityFrameworkCore.Sqlite:6.0.3' with options: None
+2022-04-03 08:37:35.354 +08:00 [INF] Executed DbCommand (13ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*) FROM "sqlite_master" WHERE "type" = 'table' AND "rootpage" IS NOT NULL;
+2022-04-03 08:37:35.382 +08:00 [INF] Entity Framework Core 6.0.3 initialized 'AppDbContext' using provider 'Microsoft.EntityFrameworkCore.Sqlite:6.0.3' with options: None
+2022-04-03 08:37:35.505 +08:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "ToDoItems" AS "t")
+2022-04-03 08:37:35.595 +08:00 [INF] Now listening on: http://localhost:57679
+2022-04-03 08:37:35.597 +08:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-04-03 08:37:35.597 +08:00 [INF] Hosting environment: Development
+2022-04-03 08:37:35.597 +08:00 [INF] Content root path: D:\GITHUB\w9wen.dotnet.Template\src\w9wen.dotnet.Template.Web\
+2022-04-03 08:37:35.758 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:57679/ - -
+2022-04-03 08:37:35.783 +08:00 [WRN] Failed to determine the https port for redirect.
+2022-04-03 08:37:35.923 +08:00 [INF] Executing endpoint 'w9wen.dotnet.Template.Web.Controllers.HomeController.Index (w9wen.dotnet.Template.Web)'
+2022-04-03 08:37:35.930 +08:00 [INF] Route matched with {action = "Index", controller = "Home", page = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller w9wen.dotnet.Template.Web.Controllers.HomeController (w9wen.dotnet.Template.Web).
+2022-04-03 08:37:35.937 +08:00 [INF] Executing ViewResult, running view Index.
+2022-04-03 08:37:36.018 +08:00 [INF] Executed ViewResult - view Index executed in 81.4494ms.
+2022-04-03 08:37:36.019 +08:00 [INF] Executed action w9wen.dotnet.Template.Web.Controllers.HomeController.Index (w9wen.dotnet.Template.Web) in 89.39ms
+2022-04-03 08:37:36.020 +08:00 [INF] Executed endpoint 'w9wen.dotnet.Template.Web.Controllers.HomeController.Index (w9wen.dotnet.Template.Web)'
+2022-04-03 08:37:36.025 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost:57679/ - - - 200 - text/html;+charset=utf-8 268.6661ms
+2022-04-03 08:37:36.039 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:57679/js/site.js?v=4q1jwFhaPaZgr8WAUSrux6hAuh0XDg9kPS3xIVq36I0 - -
+2022-04-03 08:37:36.039 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:57679/lib/jquery/dist/jquery.js - -
+2022-04-03 08:37:36.039 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:57679/lib/bootstrap/dist/js/bootstrap.js - -
+2022-04-03 08:37:36.039 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:57679/css/site.css - -
+2022-04-03 08:37:36.041 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:57679/lib/bootstrap/dist/css/bootstrap.css - -
+2022-04-03 08:37:36.074 +08:00 [INF] Sending file. Request path: '/css/site.css'. Physical path: 'D:\GITHUB\w9wen.dotnet.Template\src\w9wen.dotnet.Template.Web\wwwroot\css\site.css'
+2022-04-03 08:37:36.074 +08:00 [INF] Sending file. Request path: '/js/site.js'. Physical path: 'D:\GITHUB\w9wen.dotnet.Template\src\w9wen.dotnet.Template.Web\wwwroot\js\site.js'
+2022-04-03 08:37:36.075 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost:57679/css/site.css - - - 200 1417 text/css 36.0926ms
+2022-04-03 08:37:36.075 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost:57679/js/site.js?v=4q1jwFhaPaZgr8WAUSrux6hAuh0XDg9kPS3xIVq36I0 - - - 200 230 application/javascript 36.3066ms
+2022-04-03 08:37:36.080 +08:00 [INF] Sending file. Request path: '/lib/bootstrap/dist/js/bootstrap.js'. Physical path: 'D:\GITHUB\w9wen.dotnet.Template\src\w9wen.dotnet.Template.Web\wwwroot\lib\bootstrap\dist\js\bootstrap.js'
+2022-04-03 08:37:36.080 +08:00 [INF] Sending file. Request path: '/lib/jquery/dist/jquery.js'. Physical path: 'D:\GITHUB\w9wen.dotnet.Template\src\w9wen.dotnet.Template.Web\wwwroot\lib\jquery\dist\jquery.js'
+2022-04-03 08:37:36.080 +08:00 [INF] Sending file. Request path: '/lib/bootstrap/dist/css/bootstrap.css'. Physical path: 'D:\GITHUB\w9wen.dotnet.Template\src\w9wen.dotnet.Template.Web\wwwroot\lib\bootstrap\dist\css\bootstrap.css'
+2022-04-03 08:37:36.081 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost:57679/lib/bootstrap/dist/js/bootstrap.js - - - 200 72084 application/javascript 41.9518ms
+2022-04-03 08:37:36.081 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost:57679/lib/bootstrap/dist/css/bootstrap.css - - - 200 152767 text/css 39.9752ms
+2022-04-03 08:37:36.081 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost:57679/lib/jquery/dist/jquery.js - - - 200 278292 application/javascript 41.9561ms
+2022-04-03 08:37:36.121 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:57679/favicon.ico - -
+2022-04-03 08:37:36.123 +08:00 [INF] Sending file. Request path: '/favicon.ico'. Physical path: 'D:\GITHUB\w9wen.dotnet.Template\src\w9wen.dotnet.Template.Web\wwwroot\favicon.ico'
+2022-04-03 08:37:36.124 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost:57679/favicon.ico - - - 200 5430 image/x-icon 2.5760ms
+2022-04-03 08:37:59.253 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:57679/swagger - -
+2022-04-03 08:37:59.254 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost:57679/swagger - - - 301 0 - 3.9346ms
+2022-04-03 08:37:59.256 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:57679/swagger/index.html - -
+2022-04-03 08:37:59.287 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost:57679/swagger/index.html - - - 200 - text/html;charset=utf-8 31.3659ms
+2022-04-03 08:37:59.296 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:57679/swagger/swagger-ui.css - -
+2022-04-03 08:37:59.297 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:57679/swagger/swagger-ui-bundle.js - -
+2022-04-03 08:37:59.304 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:57679/swagger/swagger-ui-standalone-preset.js - -
+2022-04-03 08:37:59.334 +08:00 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2022-04-03 08:37:59.336 +08:00 [INF] Sending file. Request path: '/swagger-ui-standalone-preset.js'. Physical path: 'N/A'
+2022-04-03 08:37:59.337 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost:57679/swagger/swagger-ui-standalone-preset.js - - - 200 319705 application/javascript 34.1943ms
+2022-04-03 08:37:59.337 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost:57679/swagger/swagger-ui.css - - - 200 143821 text/css 40.5192ms
+2022-04-03 08:37:59.344 +08:00 [INF] Sending file. Request path: '/swagger-ui-bundle.js'. Physical path: 'N/A'
+2022-04-03 08:37:59.344 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost:57679/swagger/swagger-ui-bundle.js - - - 200 1079362 application/javascript 47.3880ms
+2022-04-03 08:37:59.467 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:57679/swagger/v1/swagger.json - -
+2022-04-03 08:37:59.489 +08:00 [INF] Request starting HTTP/1.1 GET http://localhost:57679/swagger/favicon-32x32.png - -
+2022-04-03 08:37:59.490 +08:00 [INF] Sending file. Request path: '/favicon-32x32.png'. Physical path: 'N/A'
+2022-04-03 08:37:59.490 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost:57679/swagger/favicon-32x32.png - - - 200 628 image/png 1.1128ms
+2022-04-03 08:37:59.543 +08:00 [INF] Request finished HTTP/1.1 GET http://localhost:57679/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 75.9465ms
