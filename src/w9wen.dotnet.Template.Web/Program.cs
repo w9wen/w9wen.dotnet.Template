@@ -7,6 +7,9 @@ using w9wen.dotnet.Template.Infrastructure.Data;
 using w9wen.dotnet.Template.Web;
 using Microsoft.OpenApi.Models;
 using Serilog;
+using Hangfire;
+using w9wen.dotnet.Template.Web.Jobs;
+using w9wen.dotnet.Template.Web.Configurations;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,6 +27,8 @@ string connectionString = builder.Configuration.GetConnectionString("DefaultConn
 
 builder.Services.AddDbContext(connectionString);
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+
+builder.Services.AddCoreServices(builder.Configuration);
 
 builder.Services.AddControllersWithViews().AddNewtonsoftJson();
 builder.Services.AddRazorPages();
@@ -76,6 +81,8 @@ app.UseSwagger();
 // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), specifying the Swagger JSON endpoint.
 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1"));
 
+app.UseHangfireDashboard();
+
 app.UseEndpoints(endpoints =>
 {
   endpoints.MapDefaultControllerRoute();
@@ -100,5 +107,7 @@ using (var scope = app.Services.CreateScope())
     logger.LogError(ex, "An error occurred seeding the DB. {exceptionMessage}", ex.Message);
   }
 }
+
+BackgroundJob.Enqueue<TestJob>(job => job.Execute(2));
 
 app.Run();
