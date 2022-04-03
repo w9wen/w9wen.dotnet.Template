@@ -31,6 +31,8 @@ AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 builder.Services.AddCoreServices(builder.Configuration);
 
 builder.Services.AddControllersWithViews().AddNewtonsoftJson();
+builder.Services.AddCors();
+
 builder.Services.AddRazorPages();
 
 builder.Services.AddSwaggerGen(c =>
@@ -70,6 +72,11 @@ else
   app.UseHsts();
 }
 app.UseRouting();
+
+app.UseCors(x =>
+{
+  x.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:4200");
+});
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
