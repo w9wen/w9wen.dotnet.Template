@@ -20,6 +20,8 @@ export class AppComponent implements OnInit {
   getProject() {
     this.http.get<ProjectDto>("http://localhost:57679/Projects").subscribe(response => {
       this.project = response;
+    }, error => {
+      console.log(error);
     })
   }
 }
