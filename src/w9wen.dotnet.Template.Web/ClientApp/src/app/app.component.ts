@@ -9,7 +9,7 @@ import { ProjectDto } from './_models/project-dto.model';
 })
 export class AppComponent implements OnInit {
   title = 'W9WEN App';
-  project: ProjectDto;
+  projectDto: ProjectDto;
 
   constructor(private http: HttpClient) { }
 
@@ -19,7 +19,8 @@ export class AppComponent implements OnInit {
   
   getProject() {
     this.http.get<ProjectDto>("http://localhost:57679/Projects").subscribe(response => {
-      this.project = response;
+      this.projectDto = response;
+      console.log(response);
     }, error => {
       console.log(error);
     })
