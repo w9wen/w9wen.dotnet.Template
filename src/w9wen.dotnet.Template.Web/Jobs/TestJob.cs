@@ -11,7 +11,7 @@ namespace w9wen.dotnet.Template.Web.Jobs
       _logger = logger;
     }
 
-    [JobDisplayName("OpenPorts")]
+    [JobDisplayName("TestJob")]
     public async Task Execute(int seconds)
     {
       await Task.Run(async () =>
