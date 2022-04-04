@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { ProjectDto } from './_models/project-dto.model';
+import { ProjectListResponse } from './_models/project-list-response.model';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +9,7 @@ import { ProjectDto } from './_models/project-dto.model';
 })
 export class AppComponent implements OnInit {
   title = 'W9WEN App';
-  projectDto: ProjectDto;
+  projectDto: ProjectListResponse;
 
   constructor(private http: HttpClient) { }
 
@@ -18,11 +18,12 @@ export class AppComponent implements OnInit {
   }
   
   getProject() {
-    this.http.get<ProjectDto>("http://localhost:57679/Projects").subscribe(response => {
-      this.projectDto = response;
-      console.log(response);
-    }, error => {
-      console.log(error);
-    })
+    this.http.get<ProjectListResponse>("http://localhost:57679/Projects").subscribe({
+      complete: () => { },
+      error: () => { },
+      next: (response) => {
+        this.projectDto = response;
+      },
+    });
   }
 }
