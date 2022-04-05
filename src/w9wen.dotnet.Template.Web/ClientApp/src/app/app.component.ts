@@ -18,7 +18,7 @@ export class AppComponent implements OnInit {
   }
   
   getProject() {
-    this.http.get<ProjectListResponse>("http://localhost:57679/Projects").subscribe({
+    this.http.get<ProjectListResponse>("https://localhost:5001/Projects").subscribe({
       complete: () => { },
       error: () => { },
       next: (response) => {

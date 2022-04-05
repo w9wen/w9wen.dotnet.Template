@@ -17,11 +17,11 @@ builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
 
 builder.Host.UseSerilog((_, config) => config.ReadFrom.Configuration(builder.Configuration));
 
-builder.Services.Configure<CookiePolicyOptions>(options =>
-{
-  options.CheckConsentNeeded = context => true;
-  options.MinimumSameSitePolicy = SameSiteMode.None;
-});
+// builder.Services.Configure<CookiePolicyOptions>(options =>
+// {
+//   options.CheckConsentNeeded = context => true;
+//   options.MinimumSameSitePolicy = SameSiteMode.None;
+// });
 
 string connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
@@ -30,10 +30,12 @@ AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
 builder.Services.AddCoreServices(builder.Configuration);
 
-builder.Services.AddControllersWithViews().AddNewtonsoftJson();
+// builder.Services.AddControllersWithViews().AddNewtonsoftJson();
+builder.Services.AddControllers();
 builder.Services.AddCors();
 
-builder.Services.AddRazorPages();
+// builder.Services.AddRazorPages();
+builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddSwaggerGen(c =>
 {
@@ -63,20 +65,20 @@ var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-  app.UseDeveloperExceptionPage();
+  // app.UseDeveloperExceptionPage();
   app.UseShowAllServicesMiddleware();
 }
 else
 {
-  app.UseExceptionHandler("/Home/Error");
+  // app.UseExceptionHandler("/Home/Error");
   app.UseHsts();
 }
 app.UseRouting();
 
-app.UseCors(x =>
-{
-  x.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:4200");
-});
+app.UseCors(x => x.AllowAnyHeader()
+                  .AllowAnyMethod()
+                  .AllowCredentials()
+                  .WithOrigins("https://localhost:4200"));
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
@@ -93,7 +95,7 @@ app.UseHangfireDashboard();
 app.UseEndpoints(endpoints =>
 {
   endpoints.MapDefaultControllerRoute();
-  endpoints.MapRazorPages();
+  // endpoints.MapRazorPages();
 });
 
 // Seed Database
