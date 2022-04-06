@@ -1,6 +1,8 @@
 ﻿using w9wen.dotnet.Template.Core.ProjectAggregate;
 using w9wen.dotnet.Template.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json;
+using w9wen.dotnet.Template.Core.Entities;
 
 namespace w9wen.dotnet.Template.Web;
 
@@ -43,7 +45,7 @@ public static class SeedData
     ValidFlag = true,
   };
 
-  public static void Initialize(IServiceProvider serviceProvider)
+  public static async Task Initialize(IServiceProvider serviceProvider)
   {
     using (var dbContext = new AppDbContext(
         serviceProvider.GetRequiredService<DbContextOptions<AppDbContext>>(), null))
@@ -52,12 +54,16 @@ public static class SeedData
       dbContext.Database.MigrateAsync().GetAwaiter().GetResult();
 
       // Look for any TODO items.
-      if (dbContext.ToDoItems.Any())
+      if (!dbContext.ToDoItems.Any())
       {
-        return;   // DB has been seeded
+        PopulateTestData(dbContext);
       }
 
-      PopulateTestData(dbContext);
+      var appUserManager = serviceProvider.GetRequiredService<AppUserManager>();
+      var appRoleManager = serviceProvider.GetRequiredService<AppRoleManager>();
+
+      await SeedUsers(appUserManager, appRoleManager);
+
 
     }
   }
@@ -85,5 +91,59 @@ public static class SeedData
     dbContext.Projects.Add(TestProject1);
 
     dbContext.SaveChanges();
+  }
+
+
+  private static async Task SeedUsers(AppUserManager appUserManager,
+                                     AppRoleManager appRoleManager)
+  {
+    // if (await appUserManager.Users.AnyAsync()) return;
+    // var userData = await File.ReadAllTextAsync("UserSeedData.json");
+
+    // var users = JsonSerializer.Deserialize<List<AppUserEntity>>(userData);
+    // if (users == null) return;
+
+    var roles = new List<AppRoleEntity>
+    {
+      new AppRoleEntity{Name = AppRoleTypeEnum.SuperAdmin.ToString()},
+      new AppRoleEntity{Name = AppRoleTypeEnum.Admin.ToString()},
+      new AppRoleEntity{Name = AppRoleTypeEnum.Operator.ToString()},
+      new AppRoleEntity{Name = AppRoleTypeEnum.Member.ToString()},
+    };
+
+    foreach (var role in roles)
+    {
+      await appRoleManager.CreateAsync(role);
+    }
+
+    // foreach (var user in users)
+    // {
+    //   await appUserManager.CreateAsync(user, "P@$$w0rd");
+    //   await appUserManager.AddToRoleAsync(user, Enum.GetName(AppRoleTypeEnum.Member));
+    // }
+
+    var admin = new AppUserEntity
+    {
+      UserName = "Admin"
+    };
+
+    await appUserManager.CreateAsync(admin, "Aa!23456");
+    await appUserManager.AddToRolesAsync(admin, new[]
+        {
+          Enum.GetName(AppRoleTypeEnum.Admin),
+        });
+
+    var superAdmin = new AppUserEntity
+    {
+      UserName = "w9wen"
+    };
+
+    await appUserManager.CreateAsync(superAdmin, "Aa!23456");
+    await appUserManager.AddToRolesAsync(superAdmin, new[]
+        {
+          Enum.GetName(AppRoleTypeEnum.SuperAdmin),
+          Enum.GetName(AppRoleTypeEnum.Admin),
+        });
+
   }
 }

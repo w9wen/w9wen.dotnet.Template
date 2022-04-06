@@ -29,6 +29,7 @@ builder.Services.AddDbContext(connectionString);
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
 builder.Services.AddCoreServices(builder.Configuration);
+builder.Services.AddIdentityServices(builder.Configuration);
 
 // builder.Services.AddControllersWithViews().AddNewtonsoftJson();
 builder.Services.AddControllers();
@@ -108,7 +109,7 @@ using (var scope = app.Services.CreateScope())
     var context = services.GetRequiredService<AppDbContext>();
     //                    context.Database.Migrate();
     context.Database.EnsureCreated();
-    SeedData.Initialize(services);
+    await SeedData.Initialize(services);
   }
   catch (Exception ex)
   {
