@@ -1,0 +1,7 @@
+<h1>{{title}}</h1>
+
+<ul *ngIf="projectDto">
+    <li *ngFor="let project of projectDto.projects">
+        <h3>{{project.name}}</h3>
+    </li>
+</ul>

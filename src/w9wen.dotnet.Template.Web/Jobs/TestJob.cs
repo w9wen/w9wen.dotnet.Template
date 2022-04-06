@@ -14,7 +14,7 @@ namespace w9wen.dotnet.Template.Web.Jobs
     [JobDisplayName("TestJob")]
     public async Task Execute(int seconds)
     {
-      await Task.Run(async () =>
+      await Task.Run(() =>
       {
         _logger.LogDebug("Start TestJob");
         Task.Delay(seconds * 1000).Wait();
