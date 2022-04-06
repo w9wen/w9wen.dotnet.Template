@@ -121,6 +121,6 @@
     <value>使用者姓名不正確</value>
   </data>
   <data name="Unauthorized" xml:space="preserve">
-    <value>使用者沒有權限</value>
+    <value>沒有使用權限</value>
   </data>
 </root>
