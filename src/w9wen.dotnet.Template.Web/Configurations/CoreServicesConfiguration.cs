@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using w9wen.dotnet.Template.Core.Entities;
 using w9wen.dotnet.Template.Infrastructure.Data;
+using w9wen.dotnet.Template.Web.Interfaces;
+using w9wen.dotnet.Template.Web.Services;
 
 namespace w9wen.dotnet.Template.Web.Configurations
 {
@@ -16,6 +18,7 @@ namespace w9wen.dotnet.Template.Web.Configurations
       services.AddAutoMapper(typeof(MappingProfile).Assembly);
       services.AddHangfire(config =>
             config.UsePostgreSqlStorage(configuration.GetConnectionString("DefaultConnection")));
+      services.AddScoped<ITokenService, TokenService>();
 
       services.AddHangfireServer();
 
