@@ -16,7 +16,6 @@
     <PackageReference Include="Autofac" Version="6.3.0" />
     <PackageReference Include="MediatR" Version="10.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.3" />
-    <PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="6.0.3" />
     <PackageReference Include="w9wen.SharedKernel" Version="1.0.0" />
   </ItemGroup>
 

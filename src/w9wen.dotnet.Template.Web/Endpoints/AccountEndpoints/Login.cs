@@ -1,3 +1,4 @@
+using System.Globalization;
 using Ardalis.ApiEndpoints;
 using AutoMapper;
 using Microsoft.AspNetCore.Identity;
@@ -47,6 +48,10 @@ namespace w9wen.dotnet.Template.Web.Endpoints.AccountEndpoints
       {
         return BadRequest();
       }
+
+      var currentCulture = CultureInfo.CurrentCulture.Name;
+      var currentUICulture = CultureInfo.CurrentUICulture.Name;
+      var strUnauthorized = _stringLocalizer["Unauthorized"].Value;
 
       var test = _stringLocalizer["Invalid User Name"].Value;
 
