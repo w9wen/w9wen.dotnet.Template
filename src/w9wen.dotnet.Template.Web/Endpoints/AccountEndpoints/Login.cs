@@ -1,8 +1,10 @@
+using System.Globalization;
 using Ardalis.ApiEndpoints;
 using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Localization;
 using Swashbuckle.AspNetCore.Annotations;
 using w9wen.dotnet.Template.Core.Entities;
 using w9wen.dotnet.Template.Infrastructure.Data;
@@ -18,16 +20,19 @@ namespace w9wen.dotnet.Template.Web.Endpoints.AccountEndpoints
     private readonly SignInManager<AppUserEntity> _signInMamager;
     private readonly ITokenService _tokenService;
     private readonly IMapper _mapper;
+    private readonly IStringLocalizer<Login> _stringLocalizer;
 
     public Login(AppUserManager appUserManager,
                  SignInManager<AppUserEntity> signInMamager,
                  ITokenService tokenService,
-                 IMapper mapper)
+                 IMapper mapper,
+                 IStringLocalizer<Login> stringLocalizer)
     {
       _appUserManager = appUserManager;
       _signInMamager = signInMamager;
       _tokenService = tokenService;
       _mapper = mapper;
+      _stringLocalizer = stringLocalizer;
     }
 
     [HttpPost(LoginRequest.Route)]
@@ -44,13 +49,19 @@ namespace w9wen.dotnet.Template.Web.Endpoints.AccountEndpoints
         return BadRequest();
       }
 
+      var currentCulture = CultureInfo.CurrentCulture.Name;
+      var currentUICulture = CultureInfo.CurrentUICulture.Name;
+      var strUnauthorized = _stringLocalizer["Unauthorized"].Value;
+
+      var test = _stringLocalizer["Invalid User Name"].Value;
+
       var appUser = await _appUserManager.Users.SingleOrDefaultAsync(x => x.UserName.ToLower() == request.UserName.ToLower());
-      if (appUser == null) return Unauthorized("Invalid User Name");
+      if (appUser == null) return Unauthorized(_stringLocalizer["Invalid User Name"].Value);
 
       var result = await _signInMamager
         .CheckPasswordSignInAsync(appUser, request.Password, false);
 
-      if (!result.Succeeded) return Unauthorized();
+      if (!result.Succeeded) return Unauthorized(_stringLocalizer["Unauthorized"].Value);
 
       var response = new LoginResponse
       {

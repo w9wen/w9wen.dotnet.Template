@@ -1,8 +1,11 @@
+using System.Globalization;
 using System.Text;
 using Hangfire;
 using Hangfire.PostgreSql;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Localization.Routing;
 using Microsoft.IdentityModel.Tokens;
 using w9wen.dotnet.Template.Core.Entities;
 using w9wen.dotnet.Template.Infrastructure.Data;
@@ -15,6 +18,32 @@ namespace w9wen.dotnet.Template.Web.Configurations
   {
     public static void AddCoreServices(this IServiceCollection services, IConfiguration configuration)
     {
+
+      // builder.Services.AddControllersWithViews().AddNewtonsoftJson();
+      services.AddControllers();
+      services.AddCors();
+
+      // builder.Services.AddRazorPages();
+      services.AddHttpContextAccessor();
+
+      services.AddLocalization(opt =>
+      {
+        opt.ResourcesPath = "Resources";
+      });
+
+      services.Configure<RequestLocalizationOptions>(options =>
+      {
+        List<CultureInfo> supportedCultures = new List<CultureInfo>
+        {
+          new CultureInfo("en-US"),
+          new CultureInfo("zh-TW")
+        };
+
+        options.DefaultRequestCulture = new RequestCulture("zh-TW");
+        options.SupportedCultures = supportedCultures;
+        options.SupportedUICultures = supportedCultures;
+      });
+
       services.AddAutoMapper(typeof(MappingProfile).Assembly);
       services.AddHangfire(config =>
             config.UsePostgreSqlStorage(configuration.GetConnectionString("DefaultConnection")));
