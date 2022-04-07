@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
+import Swal from 'sweetalert2';
 import { Project, ProjectListResponse } from './_models/project-list-response.model';
 import { ProjectResponse } from './_models/project-response.model';
 import { ConfirmService } from './_services/confirm.service';
@@ -14,7 +16,7 @@ export class AppComponent implements OnInit {
   projectListResponse: ProjectListResponse;
   projectResponse: ProjectResponse;
 
-  constructor(private projectService: ProjectService, private confirmService: ConfirmService) { }
+  constructor(private projectService: ProjectService, private confirmService: ConfirmService, private toastrService: ToastrService) { }
 
   ngOnInit(): void {
     this.getProjects();
@@ -46,18 +48,20 @@ export class AppComponent implements OnInit {
       complete: () => { },
       error: () => { },
       next: (response) => {
-        console.log("create success : " + response);
+        // console.log("create success : " + response);
+        Swal.fire("Create success: " + response);
       },
     });
   }
 
   updateProject() {
-    var project: Project = { id: 9, name: "Update From Code" };
+    var project: Project = { id: 3, name: "Update From Code" };
     this.projectService.updateProject(project).subscribe({
       complete: () => { },
       error: () => { },
       next: (response) => {
-        console.log("update success");
+        // console.log("update success");
+        this.toastrService.info("Update Success");
       },
     });
   }
