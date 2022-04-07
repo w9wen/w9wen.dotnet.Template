@@ -83,8 +83,9 @@ app.UseCors(x => x.AllowAnyHeader()
                   .WithOrigins("https://localhost:4200"));
 
 app.UseHttpsRedirection();
+app.UseDefaultFiles();
 app.UseStaticFiles();
-app.UseCookiePolicy();
+// app.UseCookiePolicy();
 
 // Enable middleware to serve generated Swagger as a JSON endpoint.
 app.UseSwagger();
@@ -103,7 +104,7 @@ app.UseHangfireDashboard();
 
 app.UseEndpoints(endpoints =>
 {
-  // endpoints.MapDefaultControllerRoute();
+  endpoints.MapDefaultControllerRoute();
   endpoints.MapControllers();
   // endpoints.MapRazorPages();
 });
