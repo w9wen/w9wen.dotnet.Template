@@ -97,24 +97,24 @@ public static class SeedData
   private static async Task SeedUsers(AppUserManager appUserManager,
                                      AppRoleManager appRoleManager)
   {
+
+    if (!await appRoleManager.RoleExistsAsync(AppRoleTypeEnum.SuperAdmin.ToString()))
+      await appRoleManager.CreateAsync(new AppRoleEntity { Name = AppRoleTypeEnum.SuperAdmin.ToString() });
+
+    if (!await appRoleManager.RoleExistsAsync(AppRoleTypeEnum.Admin.ToString()))
+      await appRoleManager.CreateAsync(new AppRoleEntity { Name = AppRoleTypeEnum.Admin.ToString() });
+
+    if (!await appRoleManager.RoleExistsAsync(AppRoleTypeEnum.Operator.ToString()))
+      await appRoleManager.CreateAsync(new AppRoleEntity { Name = AppRoleTypeEnum.Operator.ToString() });
+
+    if (!await appRoleManager.RoleExistsAsync(AppRoleTypeEnum.Member.ToString()))
+      await appRoleManager.CreateAsync(new AppRoleEntity { Name = AppRoleTypeEnum.Member.ToString() });
+
     // if (await appUserManager.Users.AnyAsync()) return;
     // var userData = await File.ReadAllTextAsync("UserSeedData.json");
 
     // var users = JsonSerializer.Deserialize<List<AppUserEntity>>(userData);
     // if (users == null) return;
-
-    var roles = new List<AppRoleEntity>
-    {
-      new AppRoleEntity{Name = AppRoleTypeEnum.SuperAdmin.ToString()},
-      new AppRoleEntity{Name = AppRoleTypeEnum.Admin.ToString()},
-      new AppRoleEntity{Name = AppRoleTypeEnum.Operator.ToString()},
-      new AppRoleEntity{Name = AppRoleTypeEnum.Member.ToString()},
-    };
-
-    foreach (var role in roles)
-    {
-      await appRoleManager.CreateAsync(role);
-    }
 
     // foreach (var user in users)
     // {
@@ -122,28 +122,34 @@ public static class SeedData
     //   await appUserManager.AddToRoleAsync(user, Enum.GetName(AppRoleTypeEnum.Member));
     // }
 
-    var admin = new AppUserEntity
+    var appUserEntity = new AppUserEntity();
+
+    appUserEntity = await appUserManager.FindByNameAsync("Admin");
+
+    if (appUserEntity == null)
     {
-      UserName = "Admin"
-    };
+      appUserEntity = new AppUserEntity { UserName = "Admin" };
 
-    await appUserManager.CreateAsync(admin, "Aa!23456");
-    await appUserManager.AddToRolesAsync(admin, new[]
-        {
-          Enum.GetName(AppRoleTypeEnum.Admin),
-        });
+      var identityResult = await appUserManager.CreateAsync(appUserEntity, "Aa!23456");
 
-    var superAdmin = new AppUserEntity
+      if (identityResult.Succeeded)
+      {
+        await appUserManager.AddToRoleAsync(appUserEntity, AppRoleTypeEnum.Admin.ToString());
+      }
+    }
+
+    appUserEntity = await appUserManager.FindByNameAsync("w9wen");
+
+    if (appUserEntity == null)
     {
-      UserName = "w9wen"
-    };
+      appUserEntity = new AppUserEntity { UserName = "w9wen" };
 
-    await appUserManager.CreateAsync(superAdmin, "Aa!23456");
-    await appUserManager.AddToRolesAsync(superAdmin, new[]
-        {
-          Enum.GetName(AppRoleTypeEnum.SuperAdmin),
-          Enum.GetName(AppRoleTypeEnum.Admin),
-        });
+      var identityResult = await appUserManager.CreateAsync(appUserEntity, "Aa!23456");
 
+      if (identityResult.Succeeded)
+      {
+        await appUserManager.AddToRoleAsync(appUserEntity, AppRoleTypeEnum.SuperAdmin.ToString());
+      }
+    }
   }
 }
