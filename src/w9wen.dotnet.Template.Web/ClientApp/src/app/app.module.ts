@@ -8,12 +8,14 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { SharedModule } from './_modules/shared.module';
 import { ConfirmDialogComponent } from './_modals/confirm-dialog/confirm-dialog.component';
+import { NavComponent } from './nav/nav.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    NavComponent
   ],
   imports: [
     BrowserModule,
