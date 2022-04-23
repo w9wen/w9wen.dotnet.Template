@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
 import { Project, ProjectListResponse } from './_models/project-list-response.model';
@@ -16,10 +17,19 @@ export class AppComponent implements OnInit {
   projectListResponse: ProjectListResponse;
   projectResponse: ProjectResponse;
 
-  constructor(private projectService: ProjectService, private confirmService: ConfirmService, private toastrService: ToastrService) { }
+  constructor(
+    private projectService: ProjectService,
+    private confirmService: ConfirmService,
+    private toastrService: ToastrService,
+    private spinnerService: NgxSpinnerService) { }
 
   ngOnInit(): void {
     this.getProjects();
+    this.spinnerService.show();
+
+    setTimeout(() => {
+      this.spinnerService.hide();
+    }, 5000);
   }
 
   getProjects() {
