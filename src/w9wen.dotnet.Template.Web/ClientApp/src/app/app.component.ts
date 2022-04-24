@@ -4,6 +4,8 @@ import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
 import { Project, ProjectListResponse } from './_models/project-list-response.model';
 import { ProjectResponse } from './_models/project-response.model';
+import { UserModel } from './_models/user-model';
+import { AccountService } from './_services/account.service';
 import { ConfirmService } from './_services/confirm.service';
 import { ProjectService } from './_services/project.service';
 
@@ -21,7 +23,8 @@ export class AppComponent implements OnInit {
     private projectService: ProjectService,
     private confirmService: ConfirmService,
     private toastrService: ToastrService,
-    private spinnerService: NgxSpinnerService) { }
+    private spinnerService: NgxSpinnerService,
+    private accountService: AccountService) { }
 
   ngOnInit(): void {
     this.getProjects();
@@ -30,6 +33,15 @@ export class AppComponent implements OnInit {
     setTimeout(() => {
       this.spinnerService.hide();
     }, 5000);
+
+    this.setCurrentUser();
+
+  }
+  setCurrentUser() {
+    const user: UserModel = JSON.parse(localStorage.getItem("user"));
+    if (user) {
+      this.accountService.setCurrentUser(user);
+    }
   }
 
   getProjects() {
