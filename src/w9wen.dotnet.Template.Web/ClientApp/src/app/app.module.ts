@@ -12,6 +12,7 @@ import { NavComponent } from './nav/nav.component';
 import { HomeComponent } from './home/home.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { EmployeeEditComponent } from './employee/employee-edit/employee-edit.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
     AppComponent,
     ConfirmDialogComponent,
     NavComponent,
-    HomeComponent
+    HomeComponent,
+    EmployeeEditComponent
   ],
   imports: [
     BrowserModule,

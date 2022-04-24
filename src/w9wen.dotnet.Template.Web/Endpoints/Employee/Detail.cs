@@ -12,7 +12,7 @@ namespace src.w9wen.dotnet.Template.Web.Endpoints.Employee
 {
   public class Detail : EndpointBaseAsync
       .WithRequest<GetDetailByUserNameRequest>
-      .WithActionResult<GetDetailByUserNameResponse>
+      .WithActionResult<EmployeeDto>
   {
     #region Fields
 
@@ -38,18 +38,14 @@ namespace src.w9wen.dotnet.Template.Web.Endpoints.Employee
         OperationId = "Employee.Detail",
         Tags = new[] { "EmployeeEndpoints" })
     ]
-    public override async Task<ActionResult<GetDetailByUserNameResponse>> HandleAsync([FromRoute] GetDetailByUserNameRequest request,
+    public override async Task<ActionResult<EmployeeDto>> HandleAsync([FromRoute] GetDetailByUserNameRequest request,
                                                                                 CancellationToken cancellationToken = default)
     {
       var appUserItem = await this._appUserManager.FindByNameAsync(request.UserName);
 
       if (appUserItem != null)
       {
-        var response = new GetDetailByUserNameResponse()
-        {
-          EmployeeItem = this._mapper.Map<EmployeeDto>(appUserItem)
-        };
-        return response;
+        return this._mapper.Map<EmployeeDto>(appUserItem);
       }
 
       return BadRequest();
