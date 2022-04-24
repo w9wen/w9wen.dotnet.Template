@@ -9,13 +9,17 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { SharedModule } from './_modules/shared.module';
 import { ConfirmDialogComponent } from './_modals/confirm-dialog/confirm-dialog.component';
 import { NavComponent } from './nav/nav.component';
+import { HomeComponent } from './home/home.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     ConfirmDialogComponent,
-    NavComponent
+    NavComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -23,7 +27,10 @@ import { NavComponent } from './nav/nav.component';
     HttpClientModule,
     NgbModule,
     BrowserAnimationsModule,
-    SharedModule
+    SharedModule,
+    FormsModule,
+    ReactiveFormsModule,
+    BsDropdownModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

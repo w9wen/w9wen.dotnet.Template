@@ -9,7 +9,7 @@ namespace w9wen.dotnet.Template.Web.Endpoints.AccountEndpoints
   public class LoginRequest
   {
 
-    public const string Route = "/API/Account/Login";
+    public const string Route = "/Account/Login";
 
     [Required]
     public string? UserName { get; set; }
