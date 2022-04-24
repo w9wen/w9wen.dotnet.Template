@@ -20,7 +20,7 @@ namespace w9wen.dotnet.Template.Web.Configurations
     {
 
       // builder.Services.AddControllersWithViews().AddNewtonsoftJson();
-      services.AddControllers();
+      services.AddControllers(options => options.UseNamespaceRouteToken());
       services.AddCors();
 
       // builder.Services.AddRazorPages();
