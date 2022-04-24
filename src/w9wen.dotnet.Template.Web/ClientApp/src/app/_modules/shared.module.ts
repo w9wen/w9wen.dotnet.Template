@@ -5,6 +5,7 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { TimeagoModule } from 'ngx-timeago';
 
 @NgModule({
   declarations: [],
@@ -16,14 +17,16 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right'
     }),
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    TimeagoModule.forRoot(),
   ],
   exports: [
     ModalModule,
     SweetAlert2Module,
     ToastrModule,
     NgxSpinnerModule,
-    BsDropdownModule
+    BsDropdownModule,
+    TimeagoModule
   ]
 })
 export class SharedModule { }
