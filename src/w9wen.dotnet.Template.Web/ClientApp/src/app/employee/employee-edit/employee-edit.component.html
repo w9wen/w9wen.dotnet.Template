@@ -8,19 +8,6 @@
         </div>
     </div> -->
 
-    <!-- id: number;
-        userName: string;
-        updatedDateTime: Date;
-        dateOfBirth: Date;
-        knownAs: string;
-        gender: string;
-        introduction: string;
-        interests: string;
-        city: string;
-        country: string; -->
-
-
-
     <div class="col-4">
         <div class="card">
             <img src="{{'./assets/user.png'}}" alt="{{employeeItem.knownAs}}" class="card-img-top img-thumbnail">
@@ -50,18 +37,19 @@
         </div>
     </div>
 
-    <!-- <div class="col-8">
+    <div class="col-8">
         <tabset class="employeeItem-tabset">
-            <tab heading='About {{employeeItem.knownAs}}'>
-                <form #editForm="ngForm" id="editForm" (ngSubmit)="updateemployeeItem()">
+            <tab heading="About {{employeeItem.knownAs}}">
+                <form #editForm="ngForm" id="editForm" (ngSubmit)="updateEmployee()">
                     <h4>Description</h4>
                     <textarea class="form-control" [(ngModel)]="employeeItem.introduction" name="introduction"
                         rows="6"></textarea>
-                    <h4 class="mt-2">Looking for</h4>
+                    <!-- <h4 class="mt-2">Looking for</h4>
                     <textarea class="form-control" [(ngModel)]="employeeItem.lookingFor" name="lookingFor"
-                        rows="6"></textarea>
+                        rows="6"></textarea> -->
                     <h4 class="mt-2">Interests</h4>
-                    <textarea class="form-control" [(ngModel)]="employeeItem.interests" name="interests" rows="6"></textarea>
+                    <textarea class="form-control" [(ngModel)]="employeeItem.interests" name="interests"
+                        rows="6"></textarea>
                     <h4 class="mt-2">Location Details: </h4>
                     <div class="form-inline">
                         <label for="city">City: </label>
@@ -72,9 +60,9 @@
                 </form>
 
             </tab>
-            <tab heading='Edit Photos'>
+            <!-- <tab heading='Edit Photos'>
                 <app-photo-editor [employeeItem]="employeeItem"></app-photo-editor>
-            </tab>
+            </tab> -->
         </tabset>
-    </div> -->
+    </div>
 </div>

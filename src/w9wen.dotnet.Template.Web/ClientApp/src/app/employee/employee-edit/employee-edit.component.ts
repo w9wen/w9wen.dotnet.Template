@@ -40,4 +40,15 @@ export class EmployeeEditComponent implements OnInit {
     });
   }
 
+  updateEmployee() {
+    this.employeeService.updateEmployee(this.employeeItem).subscribe({
+      complete: () => {
+        this.toastrService.success('Profile updated completed');
+      },
+      next: () => {
+        this.toastrService.success('Profile updated successfully');
+      },
+    });
+  }
+
 }
