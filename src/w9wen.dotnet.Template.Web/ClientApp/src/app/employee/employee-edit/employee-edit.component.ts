@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { take } from 'rxjs';
 import { UserModel } from 'src/app/_models/user-model';
@@ -12,8 +13,15 @@ import { EmployeeService } from '../employee.service';
   styleUrls: ['./employee-edit.component.css']
 })
 export class EmployeeEditComponent implements OnInit {
+  @ViewChild('editForm') editForm: NgForm;
   userItem: UserModel;
   employeeItem: EmployeeModel;
+
+  @HostListener('window:beforeunload', ['$event']) unloadNotification($event: any) {
+    if (this.editForm.dirty) {
+      $event.returnValue = true;
+    }
+  }
 
   constructor(
     private employeeService: EmployeeService,

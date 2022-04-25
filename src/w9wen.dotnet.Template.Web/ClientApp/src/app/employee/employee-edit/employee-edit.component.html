@@ -2,11 +2,11 @@
     <div class="col-4">
         <h1>Your profile</h1>
     </div>
-    <!-- <div class="col-8">
+    <div class="col-8">
         <div class="alert alert-info" *ngIf="editForm.dirty">
             <strong>Information: </strong> You have made changes. Any unsaved changes will be lost
         </div>
-    </div> -->
+    </div>
 
     <div class="col-4">
         <div class="card">
@@ -38,7 +38,7 @@
     </div>
 
     <div class="col-8">
-        <tabset class="employeeItem-tabset">
+        <tabset class="employee-tabset">
             <tab heading="About {{employeeItem.knownAs}}">
                 <form #editForm="ngForm" id="editForm" (ngSubmit)="updateEmployee()">
                     <h4>Description</h4>
