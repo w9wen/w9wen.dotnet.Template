@@ -11,6 +11,8 @@ public class EmployeeDto
   [Required]
   public string? UserName { get; set; }
 
+  public DateTime CreatedDateTime { get; set; }
+
   public DateTime UpdatedDateTime { get; set; }
 
   //   public ICollection<AppUserRoleEntity>? AppUserRoles { get; set; }

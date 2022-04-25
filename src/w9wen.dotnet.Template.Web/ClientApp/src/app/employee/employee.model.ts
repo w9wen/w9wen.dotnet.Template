@@ -1,6 +1,7 @@
 export interface EmployeeModel {
     id: number;
     userName: string;
+    createdDateTime: Date;
     updatedDateTime: Date;
     dateOfBirth: Date;
     knownAs: string;

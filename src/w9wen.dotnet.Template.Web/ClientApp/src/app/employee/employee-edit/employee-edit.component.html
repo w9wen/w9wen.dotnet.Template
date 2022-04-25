@@ -37,10 +37,10 @@
                     <strong>Last Active:</strong>
                     <p>{{employeeItem.updatedDateTime | timeago}}</p>
                 </div>
-                <!-- <div>
-                    <strong>employeeItem since:</strong>
-                    <p>{{employeeItem.created | date: 'dd MMM yyyy'}}</p>
-                </div> -->
+                <div>
+                    <strong>Employee since:</strong>
+                    <p>{{employeeItem.createdDateTime | date: "yyyy/MM/dd"}}</p>
+                </div>
             </div>
             <div class="card-footer">
                 <!-- <button [disabled]="!editForm.dirty" form="editForm" type="submit"
