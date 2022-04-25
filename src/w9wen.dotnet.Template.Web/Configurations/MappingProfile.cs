@@ -13,6 +13,7 @@ namespace w9wen.dotnet.Template.Web.Configurations
     public MappingProfile()
     {
       CreateMap<AppUserEntity, EmployeeDto>();
+      CreateMap<EmployeeDto, AppUserEntity>();
     }
   }
 }
