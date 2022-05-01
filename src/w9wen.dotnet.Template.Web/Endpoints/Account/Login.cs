@@ -8,9 +8,10 @@ using Microsoft.Extensions.Localization;
 using Swashbuckle.AspNetCore.Annotations;
 using w9wen.dotnet.Template.Core.Entities;
 using w9wen.dotnet.Template.Infrastructure.Data;
+using w9wen.dotnet.Template.Web.Endpoints.Account;
 using w9wen.dotnet.Template.Web.Interfaces;
 
-namespace w9wen.dotnet.Template.Web.Endpoints.AccountEndpoints
+namespace w9wen.dotnet.Template.Web.Endpoints.Account
 {
   public class Login : EndpointBaseAsync
     .WithRequest<LoginRequest>

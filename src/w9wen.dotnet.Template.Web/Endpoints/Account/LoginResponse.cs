@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace w9wen.dotnet.Template.Web.Endpoints.AccountEndpoints
+namespace w9wen.dotnet.Template.Web.Endpoints.Account
 {
   public class LoginResponse
   {

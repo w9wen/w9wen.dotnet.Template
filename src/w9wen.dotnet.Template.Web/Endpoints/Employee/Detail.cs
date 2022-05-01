@@ -41,7 +41,16 @@ namespace src.w9wen.dotnet.Template.Web.Endpoints.Employee
     public override async Task<ActionResult<EmployeeDto>> HandleAsync([FromRoute] GetDetailByUserNameRequest request,
                                                                                 CancellationToken cancellationToken = default)
     {
-      var appUserItem = await this._appUserManager.FindByNameAsync(request.UserName);
+      string? userName = null;
+
+      if (request.UserName is null)
+      {
+        return BadRequest();
+      }
+
+      userName = request.UserName;
+
+      var appUserItem = await this._appUserManager.FindByNameAsync(userName);
 
       if (appUserItem != null)
       {
