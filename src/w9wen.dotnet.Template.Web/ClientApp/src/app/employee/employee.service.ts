@@ -16,6 +16,16 @@ export class EmployeeService {
     return this.http.get<EmployeeModel>(this.baseUrl + "Employee/" + userName);
   }
 
+  createEmployee(model: any) {
+    return this.http.post(this.baseUrl + "Employee", model).pipe(
+      map((employee: EmployeeModel) => {
+        if (employee) {
+          console.log("Created success");
+        }
+      })
+    );
+  }
+
   updateEmployee(employee: EmployeeModel) {
     return this.http.put(this.baseUrl + "Employee", employee).pipe(
       map(() => {

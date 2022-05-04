@@ -42,10 +42,10 @@ namespace w9wen.dotnet.Template.Web.Endpoints.Employee
         return BadRequest("User name could not be null or empty");
       }
 
-      if (request.AppRoleList == null || request.AppRoleList.Count < 1)
-      {
-        return BadRequest("You should choose a role at lease!");
-      }
+      // if (request.AppRoleList == null || request.AppRoleList.Count < 1)
+      // {
+      //   return BadRequest("You should choose a role at lease!");
+      // }
 
       if (await _appUserManager.Users.AnyAsync(x => x.UserName.ToLower().Equals(request.UserName.ToLower())))
       {
@@ -58,9 +58,9 @@ namespace w9wen.dotnet.Template.Web.Endpoints.Employee
 
       if (!createResult.Succeeded) return BadRequest(createResult.Errors);
 
-      var addToRoleResult = await _appUserManager.AddToRolesAsync(appUserItem, request.AppRoleList);
+      // var addToRoleResult = await _appUserManager.AddToRolesAsync(appUserItem, request.AppRoleList);
 
-      if (!addToRoleResult.Succeeded) return BadRequest(addToRoleResult.Errors);
+      // if (!addToRoleResult.Succeeded) return BadRequest(addToRoleResult.Errors);
 
       return _mapper.Map<EmployeeDto>(appUserItem);
 

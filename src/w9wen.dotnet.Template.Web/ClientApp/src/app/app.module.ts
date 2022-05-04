@@ -13,6 +13,11 @@ import { HomeComponent } from './home/home.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { EmployeeEditComponent } from './employee/employee-edit/employee-edit.component';
+import { EmployeeCreateComponent } from './employee/employee-create/employee-create.component';
+import { TextInputComponent } from './_forms/text-input/text-input.component';
+import { DateInputComponent } from './_forms/date-input/date-input.component';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { EmployeePanelComponent } from './employee/employee-panel/employee-panel.component';
 
 
 @NgModule({
@@ -21,7 +26,11 @@ import { EmployeeEditComponent } from './employee/employee-edit/employee-edit.co
     ConfirmDialogComponent,
     NavComponent,
     HomeComponent,
-    EmployeeEditComponent
+    EmployeeEditComponent,
+    EmployeeCreateComponent,
+    TextInputComponent,
+    DateInputComponent,
+    EmployeePanelComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +41,8 @@ import { EmployeeEditComponent } from './employee/employee-edit/employee-edit.co
     SharedModule,
     FormsModule,
     ReactiveFormsModule,
-    BsDropdownModule.forRoot()
+    BsDropdownModule.forRoot(),
+    BsDatepickerModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
