@@ -1,4 +1,5 @@
 using Ardalis.ApiEndpoints;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using src.w9wen.dotnet.Template.Web.Endpoints.Employee;
 using Swashbuckle.AspNetCore.Annotations;
@@ -11,10 +12,12 @@ namespace w9wen.dotnet.Template.Web.Endpoints.Employee
     .WithActionResult<IEnumerable<EmployeeDto>>
   {
     private readonly AppUserManager _appUserManager;
+    private readonly IMapper _mapper;
 
-    public List(AppUserManager appUserManager)
+    public List(AppUserManager appUserManager, IMapper mapper)
     {
       _appUserManager = appUserManager;
+      _mapper = mapper;
     }
     [HttpGet(EmployeeListRequest.Route)]
     [SwaggerOperation(
@@ -23,22 +26,22 @@ namespace w9wen.dotnet.Template.Web.Endpoints.Employee
         OperationId = "Employee.List",
         Tags = new[] { "EmployeeEndpoints" })
     ]
-    public override Task<ActionResult<IEnumerable<EmployeeDto>>> HandleAsync([FromQuery] EmployeeListRequest request, CancellationToken cancellationToken = default)
+    public override async Task<ActionResult<IEnumerable<EmployeeDto>>> HandleAsync([FromQuery] EmployeeListRequest request, CancellationToken cancellationToken = default)
     {
       var query = _appUserManager.Users;
-      query = query.Where(x => x.Gender == request.Gender);
-      query = query.Where(x => x.City == request.City);
-      query = query.Where(x => x.Country == request.Country);
+
+      if (string.IsNullOrEmpty(request.Gender)) query = query.Where(x => x.Gender == request.Gender);
+      if (string.IsNullOrEmpty(request.City)) query = query.Where(x => x.City == request.City);
+      if (string.IsNullOrEmpty(request.Country)) query = query.Where(x => x.Country == request.Country);
 
       query = request.OrderBy switch
       {
-        "createdDateTime" 
-              => query.OrderByDescending(x => x.CreatedDateTime),
-            _ => query.OrderByDescending(x => x.UserName)
+        "createdDateTime"
+          => query.OrderByDescending(x => x.CreatedDateTime),
+        _ => query.OrderByDescending(x => x.UserName)
 
       };
-
-      throw new NotImplementedException();
+      return _mapper.Map<List<EmployeeDto>>(query.ToList());
     }
   }
 }
