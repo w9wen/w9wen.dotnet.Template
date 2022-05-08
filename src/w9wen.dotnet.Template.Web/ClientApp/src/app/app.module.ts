@@ -18,6 +18,9 @@ import { TextInputComponent } from './_forms/text-input/text-input.component';
 import { DateInputComponent } from './_forms/date-input/date-input.component';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { EmployeePanelComponent } from './employee/employee-panel/employee-panel.component';
+import { EmployeeListComponent } from './employee/employee-list/employee-list.component';
+import { EmployeeCardComponent } from './employee/employee-card/employee-card.component';
+import { EmployeeDetailComponent } from './employee/employee-detail/employee-detail.component';
 
 
 @NgModule({
@@ -30,7 +33,10 @@ import { EmployeePanelComponent } from './employee/employee-panel/employee-panel
     EmployeeCreateComponent,
     TextInputComponent,
     DateInputComponent,
-    EmployeePanelComponent
+    EmployeePanelComponent,
+    EmployeeListComponent,
+    EmployeeCardComponent,
+    EmployeeDetailComponent
   ],
   imports: [
     BrowserModule,

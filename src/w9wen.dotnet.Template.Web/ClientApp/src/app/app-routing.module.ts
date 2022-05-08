@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { EmployeeCreateComponent } from './employee/employee-create/employee-create.component';
+import { EmployeeDetailResolver } from './employee/employee-detail.resolver';
+import { EmployeeDetailComponent } from './employee/employee-detail/employee-detail.component';
 import { EmployeeEditComponent } from './employee/employee-edit/employee-edit.component';
 import { EmployeePanelComponent } from './employee/employee-panel/employee-panel.component';
 import { HomeComponent } from './home/home.component';
@@ -12,7 +14,8 @@ const routes: Routes = [
     children: [
       { path: "employees", component: EmployeePanelComponent },
       { path: "employee/edit", component: EmployeeEditComponent },
-      { path: "employees/create", component: EmployeeCreateComponent }
+      { path: "employees/create", component: EmployeeCreateComponent },
+      { path: "employee/:username", component: EmployeeDetailComponent, resolve: { employee: EmployeeDetailResolver } }
     ]
   }
 ];

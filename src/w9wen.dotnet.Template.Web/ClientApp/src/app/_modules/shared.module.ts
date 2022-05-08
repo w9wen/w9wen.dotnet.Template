@@ -6,6 +6,8 @@ import { ToastrModule } from 'ngx-toastr';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TimeagoModule } from 'ngx-timeago';
+import { PaginationModule } from "ngx-bootstrap/pagination";
+import { TabsModule } from "ngx-bootstrap/tabs";
 
 @NgModule({
   declarations: [],
@@ -19,6 +21,8 @@ import { TimeagoModule } from 'ngx-timeago';
     }),
     NgxSpinnerModule,
     TimeagoModule.forRoot(),
+    PaginationModule.forRoot(),
+    TabsModule.forRoot()
   ],
   exports: [
     ModalModule,
@@ -26,7 +30,9 @@ import { TimeagoModule } from 'ngx-timeago';
     ToastrModule,
     NgxSpinnerModule,
     BsDropdownModule,
-    TimeagoModule
+    TimeagoModule,
+    PaginationModule,
+    TabsModule
   ]
 })
 export class SharedModule { }
