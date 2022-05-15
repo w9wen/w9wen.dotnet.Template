@@ -21,6 +21,7 @@ import { EmployeePanelComponent } from './employee/employee-panel/employee-panel
 import { EmployeeListComponent } from './employee/employee-list/employee-list.component';
 import { EmployeeCardComponent } from './employee/employee-card/employee-card.component';
 import { EmployeeDetailComponent } from './employee/employee-detail/employee-detail.component';
+import { HasRolesDirective } from './_directives/has-roles.directive';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { EmployeeDetailComponent } from './employee/employee-detail/employee-det
     EmployeePanelComponent,
     EmployeeListComponent,
     EmployeeCardComponent,
-    EmployeeDetailComponent
+    EmployeeDetailComponent,
+    HasRolesDirective
   ],
   imports: [
     BrowserModule,
