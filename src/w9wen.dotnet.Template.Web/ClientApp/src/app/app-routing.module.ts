@@ -6,15 +6,27 @@ import { EmployeeDetailComponent } from './employee/employee-detail/employee-det
 import { EmployeeEditComponent } from './employee/employee-edit/employee-edit.component';
 import { EmployeePanelComponent } from './employee/employee-panel/employee-panel.component';
 import { HomeComponent } from './home/home.component';
+import { AdminGuard } from './_guards/admin.guard';
 
 const routes: Routes = [
   { path: "", component: HomeComponent },
   {
     path: "",
     children: [
-      { path: "employees", component: EmployeePanelComponent },
-      { path: "employee/edit/:username", component: EmployeeEditComponent, resolve: { employee: EmployeeDetailResolver } },
-      { path: "employees/create", component: EmployeeCreateComponent },
+      {
+        path: "employees",
+        component: EmployeePanelComponent,
+        canActivate: [AdminGuard]
+      },
+      {
+        path: "employee/edit/:username",
+        component: EmployeeEditComponent,
+        resolve: { employee: EmployeeDetailResolver }
+      },
+      {
+        path: "employees/create",
+        component: EmployeeCreateComponent
+      },
       { path: "employee/:username", component: EmployeeDetailComponent, resolve: { employee: EmployeeDetailResolver } }
     ]
   }
