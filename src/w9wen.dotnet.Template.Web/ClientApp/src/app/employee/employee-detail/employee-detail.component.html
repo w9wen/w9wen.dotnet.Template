@@ -9,6 +9,10 @@
                     <i class="fa fa-user-circle text-success"></i> Online now
                 </div> -->
                 <div>
+                    <strong>Roles:</strong>
+                    <p>{{employee.roles}}</p>
+                </div>
+                <div>
                     <strong>Location:</strong>
                     <p>{{employee.city}}, {{employee.country}}</p>
                 </div>
@@ -17,7 +21,7 @@
                     <p>{{employee.dateOfBirth}}</p>
                 </div>
                 <div>
-                    <strong>Last Active:</strong>
+                    <strong>Last Modify:</strong>
                     <p>{{employee.updatedDateTime | timeago}}</p>
                 </div>
                 <div>

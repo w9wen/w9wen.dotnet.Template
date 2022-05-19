@@ -10,6 +10,7 @@ export interface EmployeeModel {
     interests: string;
     city: string;
     country: string;
+    roles: string[];
 }
 
 
