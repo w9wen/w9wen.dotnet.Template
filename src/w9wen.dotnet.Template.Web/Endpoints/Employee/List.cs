@@ -32,7 +32,10 @@ namespace w9wen.dotnet.Template.Web.Endpoints.Employee
     ]
     public override async Task<ActionResult<IEnumerable<EmployeeDto>>> HandleAsync([FromQuery] EmployeeListRequest request, CancellationToken cancellationToken = default)
     {
-      var query = _appUserManager.Users;
+      var query = _appUserManager.Users
+                  .Include(x => x.AppUserRoles)
+                  .ThenInclude(x => x.AppRole)
+                  .AsQueryable();
 
       #region filter
 

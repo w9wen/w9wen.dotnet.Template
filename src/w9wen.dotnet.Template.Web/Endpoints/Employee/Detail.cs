@@ -54,7 +54,15 @@ namespace src.w9wen.dotnet.Template.Web.Endpoints.Employee
 
       if (appUserItem != null)
       {
-        return this._mapper.Map<EmployeeDto>(appUserItem);
+        var employeeDto = this._mapper.Map<EmployeeDto>(appUserItem);
+
+        //// 取得Employee Roles
+        var appUserRoles = await this._appUserManager.GetRolesAsync(appUserItem);
+        if (appUserRoles != null && appUserRoles.Count() > 0)
+        {
+          employeeDto.Roles = appUserRoles.ToList();
+        }
+        return employeeDto;
       }
 
       return BadRequest();

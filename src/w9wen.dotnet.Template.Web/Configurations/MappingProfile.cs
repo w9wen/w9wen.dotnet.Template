@@ -13,7 +13,8 @@ namespace w9wen.dotnet.Template.Web.Configurations
   {
     public MappingProfile()
     {
-      CreateMap<AppUserEntity, EmployeeDto>();
+      CreateMap<AppUserEntity, EmployeeDto>()
+        .ForMember(x => x.Roles, y => y.MapFrom(o => o.AppUserRoles.Select(z => z.AppRole.Name)));
       CreateMap<EmployeeDto, AppUserEntity>();
 
       CreateMap<CreateEmployeeRequest, AppUserEntity>();

@@ -31,4 +31,6 @@ public class EmployeeDto
 
   public string? Country { get; set; }
 
+  public List<string>? Roles { get; set; }
+
 }
