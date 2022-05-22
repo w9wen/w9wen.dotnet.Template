@@ -12,6 +12,9 @@
         <div class="card">
             <img src="{{'./assets/user.png'}}" alt="{{employeeItem.knownAs}}" class="card-img-top img-thumbnail">
             <div class="card-body">
+                <div *ngIf="userItem.userName != employeeItem.userName">;
+                    <strong>Roles</strong>
+                </div>
                 <div>
                     <strong>Location:</strong>
                     <p>{{employeeItem.city}}, {{employeeItem.country}}</p>

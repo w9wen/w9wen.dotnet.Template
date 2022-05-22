@@ -15,7 +15,7 @@ import { EmployeeService } from '../employee.service';
 })
 export class EmployeeEditComponent implements OnInit {
   @ViewChild('editForm') editForm: NgForm;
-  // userItem: UserModel;
+  userItem: UserModel;
   employeeItem: EmployeeModel;
 
   @HostListener('window:beforeunload', ['$event']) unloadNotification($event: any) {
@@ -31,11 +31,11 @@ export class EmployeeEditComponent implements OnInit {
     private accountService: AccountService,
     private toastrService: ToastrService) {
 
-    // this.accountService.currentUser$.pipe(take(1)).subscribe({
-    //   next: (response) => {
-    //     this.userItem = response;
-    //   },
-    // });
+    this.accountService.currentUser$.pipe(take(1)).subscribe({
+      next: (response) => {
+        this.userItem = response;
+      },
+    });
 
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   }
