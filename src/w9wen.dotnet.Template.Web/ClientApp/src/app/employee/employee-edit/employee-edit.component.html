@@ -12,9 +12,35 @@
         <div class="card">
             <img src="{{'./assets/user.png'}}" alt="{{employeeItem.knownAs}}" class="card-img-top img-thumbnail">
             <div class="card-body">
-                <div *ngIf="userItem.userName != employeeItem.userName">;
+                <!-- <div *ngIf="userItem.userName != employeeItem.userName">;
                     <strong>Roles</strong>
+                </div> -->
+
+                <div class="btn-group" *ngIf="userItem.userName != employeeItem.userName" dropdown
+                    [isDisabled]="disabled">
+                    <button id="button-disabled-menu" dropdownToggle type="button"
+                        class="btn btn-primary dropdown-toggle" aria-controls="dropdown-disabled-menu">
+                        Employee Roles <span class="caret"></span>
+                    </button>
+                    <ul id="dropdown-disabled-menu" *dropdownMenu class="dropdown-menu" role="menu"
+                        aria-labelledby="button-disabled-menu">
+                        <li *ngFor="let role of roles" role="menuRole"><a class="dropdown-item" href="#">{{ role }}</a>
+                        </li>
+                        <!-- <li role="menuRole"><a class="dropdown-item" href="#">Action</a></li>
+                        <li role="menuRole"><a class="dropdown-item" href="#">Another action</a>
+                        </li>
+                        <li role="menuRole"><a class="dropdown-item" href="#">Something else
+                                here</a></li>
+                        <li class="divider dropdown-divider"></li>
+                        <li role="menuRole"><a class="dropdown-item" href="#">Separated link</a>
+                        </li> -->
+                    </ul>
                 </div>
+                <!-- <button type="button" class="btn btn-warning" (click)="disabled = !disabled">
+                    Enable/Disable
+                </button> -->
+
+
                 <div>
                     <strong>Location:</strong>
                     <p>{{employeeItem.city}}, {{employeeItem.country}}</p>

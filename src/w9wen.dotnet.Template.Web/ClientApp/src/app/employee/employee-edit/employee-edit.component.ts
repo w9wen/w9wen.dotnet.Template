@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { take } from 'rxjs';
 import { UserModel } from 'src/app/_models/user-model';
 import { AccountService } from 'src/app/_services/account.service';
+import { CommonService } from 'src/app/_services/common.service';
 import { EmployeeModel } from '../employee.Model';
 import { EmployeeService } from '../employee.service';
 
@@ -15,8 +16,10 @@ import { EmployeeService } from '../employee.service';
 })
 export class EmployeeEditComponent implements OnInit {
   @ViewChild('editForm') editForm: NgForm;
+  disabled = false;
   userItem: UserModel;
   employeeItem: EmployeeModel;
+  roles: string[];
 
   @HostListener('window:beforeunload', ['$event']) unloadNotification($event: any) {
     if (this.editForm.dirty) {
@@ -29,6 +32,7 @@ export class EmployeeEditComponent implements OnInit {
     private router: Router,
     private employeeService: EmployeeService,
     private accountService: AccountService,
+    private commonService: CommonService,
     private toastrService: ToastrService) {
 
     this.accountService.currentUser$.pipe(take(1)).subscribe({
@@ -47,6 +51,7 @@ export class EmployeeEditComponent implements OnInit {
       }
     });
     // this.loadEmployee();
+    this.getRoles();
   }
 
   // loadEmployee() {
@@ -64,6 +69,15 @@ export class EmployeeEditComponent implements OnInit {
       },
       next: () => {
         this.toastrService.success('Profile updated successfully');
+      },
+    });
+  }
+
+  getRoles() {
+    return this.commonService.getRoles().subscribe({
+      next: (roles) => {
+        // console.log(roles);
+        this.roles = roles;
       },
     });
   }
