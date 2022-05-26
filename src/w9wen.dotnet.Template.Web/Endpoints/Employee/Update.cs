@@ -3,6 +3,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using src.w9wen.dotnet.Template.Web.Endpoints.Employee;
 using Swashbuckle.AspNetCore.Annotations;
+using w9wen.dotnet.Template.Core.Entities;
 using w9wen.dotnet.Template.Infrastructure.Data;
 
 namespace w9wen.dotnet.Template.Web.Endpoints.Employee
@@ -42,10 +43,42 @@ namespace w9wen.dotnet.Template.Web.Endpoints.Employee
 
       if (item != null)
       {
-        var resultMapping = _mapper.Map(request, item);
-        var updateResult = await this._appUserManager.UpdateAsync(resultMapping);
+        var appUserEntity = _mapper.Map(request, item);
+
+        var updateResult = await this._appUserManager.UpdateAsync(appUserEntity);
         if (updateResult.Succeeded)
         {
+          var requestRoles = request.Roles;
+          if (requestRoles != null && requestRoles.Count > 0)
+          {
+            var appRoles = await this._appUserManager.GetRolesAsync(appUserEntity);
+            if (appRoles != null && appRoles.Count > 0)
+            {
+              var addRoles = requestRoles.Except(appRoles);
+              var removeRoles = appRoles.Except(requestRoles);
+
+              if (addRoles != null && addRoles.Count() > 0)
+              {
+                await this._appUserManager.AddToRolesAsync(appUserEntity, addRoles);
+              }
+              if (removeRoles != null && removeRoles.Count() > 0)
+              {
+                await this._appUserManager.RemoveFromRolesAsync(appUserEntity, removeRoles);
+              }
+            }
+            else
+            {
+              await this._appUserManager.AddToRolesAsync(appUserEntity, requestRoles);
+            }
+          }
+          else
+          {
+            await this._appUserManager.RemoveFromRolesAsync(appUserEntity, Enum.GetNames(typeof(AppRoleTypeEnum)));
+            // foreach (var role in await this._appUserManager.GetRolesAsync(appUserEntity))
+            // {
+            //   await this._appUserManager.RemoveFromRoleAsync(appUserEntity, role);
+            // }
+          }
           return Ok();
         }
         return BadRequest();

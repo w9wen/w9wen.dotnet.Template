@@ -67,7 +67,7 @@ namespace w9wen.dotnet.Template.Infrastructure.Data
     public override IQueryable<AppUserEntity> Users
       => base.Users
         .Where(u => u.ValidFlag)
-        .Include(r => r.AppUserRoles)
+        .Include(r => r.AppUserRoles.Where(ur => ur.ValidFlag))
         .ThenInclude(r => r.AppRole);
 
     public override async Task<IdentityResult> CreateAsync(AppUserEntity user, string password)
@@ -133,7 +133,8 @@ namespace w9wen.dotnet.Template.Infrastructure.Data
 
     public override async Task<IdentityResult> AddToRolesAsync(AppUserEntity user, IEnumerable<string> roles)
     {
-      var appUserRoleList = new List<AppUserRoleEntity>();
+      var appUserRoleListForAdd = new List<AppUserRoleEntity>();
+      var appUserRoleListForUpdate = new List<AppUserRoleEntity>();
       var identityErrorList = new List<IdentityError>();
 
       try
@@ -145,17 +146,32 @@ namespace w9wen.dotnet.Template.Infrastructure.Data
           var role = await _appDbContext.AppRoleDB.SingleOrDefaultAsync(x => x.Name == roleName && x.ValidFlag);
           if (role != null)
           {
-            var userRole = new AppUserRoleEntity
+            /// Find all the user roles include ValidFlag == false.
+            var userRole = await _appDbContext.AppUserRoleDB.SingleOrDefaultAsync(ur => ur.UserId == user.Id && ur.RoleId == role.Id);
+            if (userRole != null)
             {
-              UserId = user.Id,
-              RoleId = role.Id,
-              CreatedUser = userName,
-              CreatedDateTime = now,
-              UpdatedUser = userName,
-              UpdatedDateTime = now,
-              ValidFlag = true,
-            };
-            appUserRoleList.Add(userRole);
+              if (!userRole.ValidFlag)
+              {
+                userRole.UpdatedUser = userName;
+                userRole.UpdatedDateTime = now;
+                userRole.ValidFlag = true;
+                appUserRoleListForUpdate.Add(userRole);
+              }
+            }
+            else
+            {
+              userRole = new AppUserRoleEntity
+              {
+                UserId = user.Id,
+                RoleId = role.Id,
+                CreatedUser = userName,
+                CreatedDateTime = now,
+                UpdatedUser = userName,
+                UpdatedDateTime = now,
+                ValidFlag = true,
+              };
+              appUserRoleListForAdd.Add(userRole);
+            }
           }
           else
           {
@@ -166,7 +182,15 @@ namespace w9wen.dotnet.Template.Infrastructure.Data
 
         if (identityErrorList.Count > 0) return IdentityResult.Failed(identityErrorList.ToArray());
 
-        await _appDbContext.AppUserRoleDB.AddRangeAsync(appUserRoleList);
+        if (appUserRoleListForUpdate.Count > 0)
+        {
+          _appDbContext.AppUserRoleDB.UpdateRange(appUserRoleListForUpdate);
+        }
+        if (appUserRoleListForAdd.Count > 0)
+        {
+          await _appDbContext.AppUserRoleDB.AddRangeAsync(appUserRoleListForAdd);
+        }
+
         await _appDbContext.SaveChangesAsync();
         return IdentityResult.Success;
       }
@@ -204,6 +228,17 @@ namespace w9wen.dotnet.Template.Infrastructure.Data
         return IdentityResult.Failed(new IdentityError[] { new IdentityError { Description = ex.Message } });
       }
 
+    }
+
+    public override async Task<IList<string>> GetRolesAsync(AppUserEntity user)
+    {
+      var appUserRole = await _appDbContext.UserRoles
+        .Where(x => x.UserId == user.Id && x.ValidFlag)
+        .Include(ur => ur.AppRole)
+          .ThenInclude(r => r.AppUserRoles)
+          .Select(r => r.AppRole.Name)
+          .ToListAsync();
+      return appUserRole;
     }
   }
 }
