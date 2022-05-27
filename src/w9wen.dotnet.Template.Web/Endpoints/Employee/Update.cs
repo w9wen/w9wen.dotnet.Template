@@ -51,24 +51,31 @@ namespace w9wen.dotnet.Template.Web.Endpoints.Employee
           var requestRoles = request.Roles;
           if (requestRoles != null && requestRoles.Count > 0)
           {
-            var appRoles = await this._appUserManager.GetRolesAsync(appUserEntity);
-            if (appRoles != null && appRoles.Count > 0)
+            if (!Enum.GetNames(typeof(AppRoleTypeEnum)).ToList().Any(requestRoles.Contains))
             {
-              var addRoles = requestRoles.Except(appRoles);
-              var removeRoles = appRoles.Except(requestRoles);
+              var appRoles = await this._appUserManager.GetRolesAsync(appUserEntity);
+              if (appRoles != null && appRoles.Count > 0)
+              {
+                var addRoles = requestRoles.Except(appRoles);
+                var removeRoles = appRoles.Except(requestRoles);
 
-              if (addRoles != null && addRoles.Count() > 0)
-              {
-                await this._appUserManager.AddToRolesAsync(appUserEntity, addRoles);
+                if (addRoles != null && addRoles.Count() > 0)
+                {
+                  await this._appUserManager.AddToRolesAsync(appUserEntity, addRoles);
+                }
+                if (removeRoles != null && removeRoles.Count() > 0)
+                {
+                  await this._appUserManager.RemoveFromRolesAsync(appUserEntity, removeRoles);
+                }
               }
-              if (removeRoles != null && removeRoles.Count() > 0)
+              else
               {
-                await this._appUserManager.RemoveFromRolesAsync(appUserEntity, removeRoles);
+                await this._appUserManager.AddToRolesAsync(appUserEntity, requestRoles);
               }
             }
             else
             {
-              await this._appUserManager.AddToRolesAsync(appUserEntity, requestRoles);
+              return BadRequest("Invalid role");
             }
           }
           else
