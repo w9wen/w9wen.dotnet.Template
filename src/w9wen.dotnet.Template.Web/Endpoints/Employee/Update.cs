@@ -51,7 +51,8 @@ namespace w9wen.dotnet.Template.Web.Endpoints.Employee
           var requestRoles = request.Roles;
           if (requestRoles != null && requestRoles.Count > 0)
           {
-            if (!Enum.GetNames(typeof(AppRoleTypeEnum)).ToList().Any(requestRoles.Contains))
+            /// 角色應在Enum中
+            if (requestRoles.Except(Enum.GetNames(typeof(AppRoleTypeEnum)).ToList()).Count() < 1)
             {
               var appRoles = await this._appUserManager.GetRolesAsync(appUserEntity);
               if (appRoles != null && appRoles.Count > 0)

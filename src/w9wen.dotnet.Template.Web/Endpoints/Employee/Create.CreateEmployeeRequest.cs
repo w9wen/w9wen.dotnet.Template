@@ -38,5 +38,7 @@ namespace w9wen.dotnet.Template.Web.Endpoints.Employee
     // [Required]
     // public List<string>? AppRoleList { get; set; }
 
+    public List<string>? Roles { get; set; }
+
   }
 }

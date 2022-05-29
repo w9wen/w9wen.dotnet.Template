@@ -37,19 +37,26 @@ namespace w9wen.dotnet.Template.Web.Endpoints.Employee
     ]
     public override async Task<ActionResult<EmployeeDto>> HandleAsync(CreateEmployeeRequest request, CancellationToken cancellationToken = default)
     {
-      if (string.IsNullOrEmpty(request.UserName))
+      var userName = request.UserName;
+      if (string.IsNullOrEmpty(userName))
       {
         return BadRequest("User name could not be null or empty");
       }
 
-      // if (request.AppRoleList == null || request.AppRoleList.Count < 1)
-      // {
-      //   return BadRequest("You should choose a role at lease!");
-      // }
-
-      if (await _appUserManager.Users.AnyAsync(x => x.UserName.ToLower().Equals(request.UserName.ToLower())))
+      if (await _appUserManager.Users.AnyAsync(x => x.UserName.ToLower().Equals(userName.ToLower())))
       {
         return BadRequest("User name already taken");
+      }
+
+      var requestRoles = request.Roles;
+
+      if (requestRoles == null || requestRoles.Count < 1)
+      {
+        return BadRequest("You should choose a role at least!");
+      }
+      else if (requestRoles.Except(Enum.GetNames(typeof(AppRoleTypeEnum)).ToList()).Count() > 0)
+      {
+        return BadRequest("Invalid role");
       }
 
       var appUserItem = this._mapper.Map<AppUserEntity>(request);
@@ -58,11 +65,15 @@ namespace w9wen.dotnet.Template.Web.Endpoints.Employee
 
       if (!createResult.Succeeded) return BadRequest(createResult.Errors);
 
-      // var addToRoleResult = await _appUserManager.AddToRolesAsync(appUserItem, request.AppRoleList);
+      var addToRoleResult = await _appUserManager.AddToRolesAsync(appUserItem, requestRoles);
 
-      // if (!addToRoleResult.Succeeded) return BadRequest(addToRoleResult.Errors);
+      if (!addToRoleResult.Succeeded) return BadRequest(addToRoleResult.Errors);
 
-      return _mapper.Map<EmployeeDto>(appUserItem);
+      var employeeDto = _mapper.Map<EmployeeDto>(appUserItem);
+
+      employeeDto.Roles = requestRoles;
+
+      return employeeDto;
 
     }
   }
