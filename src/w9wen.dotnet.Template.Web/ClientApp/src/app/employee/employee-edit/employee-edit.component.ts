@@ -69,6 +69,7 @@ export class EmployeeEditComponent implements OnInit {
       },
       next: () => {
         this.toastrService.success('Profile updated successfully');
+        this.router.navigateByUrl("employee/" + this.employeeItem.userName);
       },
     });
   }
