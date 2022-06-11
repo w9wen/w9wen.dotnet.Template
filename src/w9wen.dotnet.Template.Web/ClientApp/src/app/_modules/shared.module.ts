@@ -8,6 +8,8 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TimeagoModule } from 'ngx-timeago';
 import { PaginationModule } from "ngx-bootstrap/pagination";
 import { TabsModule } from "ngx-bootstrap/tabs";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatSelectModule } from "@angular/material/select";
 
 @NgModule({
   declarations: [],
@@ -22,7 +24,9 @@ import { TabsModule } from "ngx-bootstrap/tabs";
     NgxSpinnerModule,
     TimeagoModule.forRoot(),
     PaginationModule.forRoot(),
-    TabsModule.forRoot()
+    TabsModule.forRoot(),
+    MatFormFieldModule,
+    MatSelectModule
   ],
   exports: [
     ModalModule,
@@ -32,7 +36,9 @@ import { TabsModule } from "ngx-bootstrap/tabs";
     BsDropdownModule,
     TimeagoModule,
     PaginationModule,
-    TabsModule
+    TabsModule,
+    MatFormFieldModule,
+    MatSelectModule
   ]
 })
 export class SharedModule { }

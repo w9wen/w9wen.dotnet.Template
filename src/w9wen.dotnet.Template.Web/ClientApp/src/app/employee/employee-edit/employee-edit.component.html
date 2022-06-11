@@ -22,23 +22,23 @@
                         class="btn btn-primary dropdown-toggle" aria-controls="dropdown-disabled-menu">
                         Employee Roles <span class="caret"></span>
                     </button>
-                    <ul id="dropdown-disabled-menu" *dropdownMenu class="dropdown-menu" role="menu"
+                    <!-- <ul id="dropdown-disabled-menu" *dropdownMenu class="dropdown-menu" role="menu"
                         aria-labelledby="button-disabled-menu">
                         <li *ngFor="let role of roles" role="menuRole"><a class="dropdown-item" href="#">{{ role }}</a>
                         </li>
-                        <!-- <li role="menuRole"><a class="dropdown-item" href="#">Action</a></li>
-                        <li role="menuRole"><a class="dropdown-item" href="#">Another action</a>
-                        </li>
-                        <li role="menuRole"><a class="dropdown-item" href="#">Something else
-                                here</a></li>
-                        <li class="divider dropdown-divider"></li>
-                        <li role="menuRole"><a class="dropdown-item" href="#">Separated link</a>
-                        </li> -->
-                    </ul>
+                    </ul> -->
                 </div>
                 <!-- <button type="button" class="btn btn-warning" (click)="disabled = !disabled">
                     Enable/Disable
                 </button> -->
+                <mat-form-field appearance="fill">
+                    <mat-label>Select Role</mat-label>
+                    <mat-select [(value)]="employeeItem.roles" multiple>
+                        <mat-option *ngFor="let role of roles" [value]="role">
+                            {{role}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
 
 
                 <div>
