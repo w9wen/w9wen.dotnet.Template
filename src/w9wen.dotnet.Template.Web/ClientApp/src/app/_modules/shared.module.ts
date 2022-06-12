@@ -10,6 +10,7 @@ import { PaginationModule } from "ngx-bootstrap/pagination";
 import { TabsModule } from "ngx-bootstrap/tabs";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatSelectModule } from "@angular/material/select";
+import { MatListModule } from "@angular/material/list";
 
 @NgModule({
   declarations: [],
@@ -26,7 +27,8 @@ import { MatSelectModule } from "@angular/material/select";
     PaginationModule.forRoot(),
     TabsModule.forRoot(),
     MatFormFieldModule,
-    MatSelectModule
+    MatSelectModule,
+    MatListModule
   ],
   exports: [
     ModalModule,
@@ -38,7 +40,8 @@ import { MatSelectModule } from "@angular/material/select";
     PaginationModule,
     TabsModule,
     MatFormFieldModule,
-    MatSelectModule
+    MatSelectModule,
+    MatListModule
   ]
 })
 export class SharedModule { }

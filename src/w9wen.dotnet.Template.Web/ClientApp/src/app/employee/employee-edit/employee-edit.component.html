@@ -16,29 +16,21 @@
                     <strong>Roles</strong>
                 </div> -->
 
-                <div class="btn-group" *ngIf="userItem.userName != employeeItem.userName" dropdown
-                    [isDisabled]="disabled">
-                    <button id="button-disabled-menu" dropdownToggle type="button"
-                        class="btn btn-primary dropdown-toggle" aria-controls="dropdown-disabled-menu">
-                        Employee Roles <span class="caret"></span>
-                    </button>
-                    <!-- <ul id="dropdown-disabled-menu" *dropdownMenu class="dropdown-menu" role="menu"
-                        aria-labelledby="button-disabled-menu">
-                        <li *ngFor="let role of roles" role="menuRole"><a class="dropdown-item" href="#">{{ role }}</a>
-                        </li>
-                    </ul> -->
+                <div>
+                    <strong>Roles:</strong>
+                    <mat-form-field appearance="fill" *ngIf="employeeItem.userName != userItem.userName">
+                        <mat-label>Select Role</mat-label>
+                        <mat-select [(value)]="employeeItem.roles" multiple>
+                            <mat-option *ngFor="let role of roles" [value]="role">
+                                {{role}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-list *ngIf="employeeItem.userName == userItem.userName">
+                        <mat-list-item *ngFor="let employeeItemRole of employeeItem.roles">{{employeeItemRole}}
+                        </mat-list-item>
+                    </mat-list>
                 </div>
-                <!-- <button type="button" class="btn btn-warning" (click)="disabled = !disabled">
-                    Enable/Disable
-                </button> -->
-                <mat-form-field appearance="fill">
-                    <mat-label>Select Role</mat-label>
-                    <mat-select [(value)]="employeeItem.roles" multiple>
-                        <mat-option *ngFor="let role of roles" [value]="role">
-                            {{role}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
 
 
                 <div>
