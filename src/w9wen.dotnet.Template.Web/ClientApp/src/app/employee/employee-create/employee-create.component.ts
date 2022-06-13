@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CommonService } from 'src/app/_services/common.service';
 import { EmployeeService } from '../employee.service';
 
 @Component({
@@ -13,14 +14,16 @@ export class EmployeeCreateComponent implements OnInit {
   createForm: FormGroup;
   maxDate: Date;
   validationErrors: string[] = [];
-
+  roles: string[];
 
   constructor(
     private employeeService: EmployeeService,
     private formBuilder: FormBuilder,
-    private router: Router) { }
+    private router: Router,
+    private commonService: CommonService) { }
 
   ngOnInit(): void {
+    this.getRoles();
     this.initializeForm();
     this.maxDate = new Date();
     this.maxDate.setFullYear(this.maxDate.getFullYear() - 18);
@@ -34,11 +37,13 @@ export class EmployeeCreateComponent implements OnInit {
       email: [""],
       dateOfBirth: [""],
       city: [""],
-      country: [""]
+      country: [""],
+      roles: [[]],
     });
   }
 
   createEmployee() {
+    console.log(this.createForm);
     this.employeeService.createEmployee(this.createForm.value).subscribe({
       next: (response) => {
         console.log(response);
@@ -47,6 +52,15 @@ export class EmployeeCreateComponent implements OnInit {
       error: (errors) => {
         this.validationErrors = errors;
       }
+    });
+  }
+
+  getRoles() {
+    return this.commonService.getRoles().subscribe({
+      next: (roles) => {
+        // console.log(roles);
+        this.roles = roles;
+      },
     });
   }
 
