@@ -40,7 +40,7 @@
 
     <div class="col-8">
         <tabset class="member-tabset" #employeeTabs>
-            <tab heading="About {{employee.knownAs}}" (selectTab)="onTabActivated($event)">
+            <tab heading="About {{employee.userName}}" (selectTab)="onTabActivated($event)">
                 <h4>Description</h4>
                 <p>{{employee.introduction}}</p>
                 <!-- <h4>Looking for</h4>
