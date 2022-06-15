@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -22,6 +22,7 @@ import { EmployeeListComponent } from './employee/employee-list/employee-list.co
 import { EmployeeCardComponent } from './employee/employee-card/employee-card.component';
 import { EmployeeDetailComponent } from './employee/employee-detail/employee-detail.component';
 import { HasRolesDirective } from './_directives/has-roles.directive';
+import { JwtInterceptor } from './_interceptors/jwt.interceptor';
 
 
 @NgModule({
@@ -52,7 +53,9 @@ import { HasRolesDirective } from './_directives/has-roles.directive';
     BsDropdownModule.forRoot(),
     BsDatepickerModule.forRoot()
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
