@@ -77,6 +77,9 @@ else
 }
 app.UseRouting();
 
+app.UseAuthentication();
+app.UseAuthorization();
+
 app.UseCors(x => x.AllowAnyHeader()
                   .AllowAnyMethod()
                   .AllowCredentials()
