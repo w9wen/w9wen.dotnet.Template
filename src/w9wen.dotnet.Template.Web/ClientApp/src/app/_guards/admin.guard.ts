@@ -7,7 +7,7 @@ import { AccountService } from '../_services/account.service';
 @Injectable({
   providedIn: 'root'
 })
-export class AdminGuard implements CanActivate {
+export class ViewPermissionGuard implements CanActivate {
 
   constructor(
     private accountService: AccountService,
@@ -16,7 +16,7 @@ export class AdminGuard implements CanActivate {
   canActivate(): Observable<boolean> {
     return this.accountService.currentUser$.pipe(
       map(user => {
-        if (user.roles.includes("Admin") || user.roles.includes("SuperAdmin")) {
+        if (user.roles.includes("SuperAdmin") || user.roles.includes("Admin") || user.roles.includes("Operator")) {
           return true;
         }
         this.toastrService.error("You cannot enter this area");

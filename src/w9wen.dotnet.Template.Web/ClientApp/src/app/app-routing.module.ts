@@ -6,7 +6,7 @@ import { EmployeeDetailComponent } from './employee/employee-detail/employee-det
 import { EmployeeEditComponent } from './employee/employee-edit/employee-edit.component';
 import { EmployeePanelComponent } from './employee/employee-panel/employee-panel.component';
 import { HomeComponent } from './home/home.component';
-import { AdminGuard } from './_guards/admin.guard';
+import { ViewPermissionGuard } from './_guards/admin.guard';
 
 const routes: Routes = [
   { path: "", component: HomeComponent },
@@ -16,7 +16,7 @@ const routes: Routes = [
       {
         path: "employees",
         component: EmployeePanelComponent,
-        canActivate: [AdminGuard]
+        canActivate: [ViewPermissionGuard]
       },
       {
         path: "employee/edit/:username",
