@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AccountService } from 'src/app/_services/account.service';
 
 @Component({
   selector: 'app-employee-panel',
@@ -7,7 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EmployeePanelComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    public accountService: AccountService) { }
 
   ngOnInit(): void {
   }
