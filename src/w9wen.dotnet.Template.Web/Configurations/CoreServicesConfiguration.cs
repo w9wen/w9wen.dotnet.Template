@@ -94,9 +94,8 @@ namespace w9wen.dotnet.Template.Web.Configurations
 
       services.AddAuthorization(options =>
       {
-        options.AddPolicy("RequireSuperAdmin", policy => policy.RequireRole("SuperAdmin"));
-        options.AddPolicy("RequireAdminRole", policy => policy.RequireRole("Admin"));
-        options.AddPolicy("ModeratePhotoRole", policy => policy.RequireRole("Admin", "Moderator"));
+        options.AddPolicy("Modify", policy => policy.RequireRole(AppRoleTypeEnum.SuperAdmin.ToString(),
+                                                                 AppRoleTypeEnum.Admin.ToString()));
       });
     }
 

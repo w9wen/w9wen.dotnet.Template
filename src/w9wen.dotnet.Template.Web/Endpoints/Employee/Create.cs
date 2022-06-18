@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Ardalis.ApiEndpoints;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using src.w9wen.dotnet.Template.Web.Endpoints.Employee;
@@ -28,13 +29,14 @@ namespace w9wen.dotnet.Template.Web.Endpoints.Employee
       _mapper = mapper;
     }
 
+    [Authorize(Policy = "Modify")]
     [HttpPost(EmployeeListRequest.Route)]
     [SwaggerOperation(
-        Summary = "Create a new employee",
-        Description = "Create a new employee",
-        OperationId = "Employee.Create",
-        Tags = new[] { "EmployeeEndpoints" })
-    ]
+            Summary = "Create a new employee",
+            Description = "Create a new employee",
+            OperationId = "Employee.Create",
+            Tags = new[] { "EmployeeEndpoints" })
+        ]
     public override async Task<ActionResult<EmployeeDto>> HandleAsync(CreateEmployeeRequest request, CancellationToken cancellationToken = default)
     {
       var userName = request.UserName;

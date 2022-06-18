@@ -1,5 +1,6 @@
 using Ardalis.ApiEndpoints;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using src.w9wen.dotnet.Template.Web.Endpoints.Employee;
 using Swashbuckle.AspNetCore.Annotations;
@@ -30,13 +31,14 @@ namespace w9wen.dotnet.Template.Web.Endpoints.Employee
 
     #endregion Constructor
 
+    [Authorize(Policy = "Modify")]
     [HttpPut("[namespace]")]
     [SwaggerOperation(
-        Summary = "Update employee.",
-        Description = "Update employee.",
-        OperationId = "Employee.Update",
-        Tags = new[] { "EmployeeEndpoints" })
-    ]
+            Summary = "Update employee.",
+            Description = "Update employee.",
+            OperationId = "Employee.Update",
+            Tags = new[] { "EmployeeEndpoints" })
+        ]
     public override async Task<ActionResult> HandleAsync(EmployeeDto request, CancellationToken cancellationToken = default)
     {
       var item = await this._appUserManager.FindByIdAsync(request.Id.ToString());
