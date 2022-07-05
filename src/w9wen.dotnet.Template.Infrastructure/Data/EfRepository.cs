@@ -42,12 +42,6 @@ public class EfRepository<T> : RepositoryBase<T>, IReadRepository<T>, IRepositor
     }
   }
 
-  public override async Task<T?> GetBySpecAsync<Spec>(Spec specification, CancellationToken cancellationToken = default)
-  {
-    var specificationResult = ApplySpecification(specification);
-    return await specificationResult.FirstOrDefaultAsync(cancellationToken);
-  }
-
   public override async Task<T> AddAsync(T entity, CancellationToken cancellationToken = default)
   {
     var entityPropertieList = entity.GetType().GetProperties();
